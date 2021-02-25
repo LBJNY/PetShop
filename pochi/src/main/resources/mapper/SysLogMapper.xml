@@ -22,11 +22,11 @@
     <sql id="Base_Column_List">
         log_id, log_url, log_params, log_status, log_message, log_ua, log_controller, log_method, log_time, log_result, log_ip, created_date, created_by
     </sql>
-    <insert id="save">
-        insert into mg_sys_log (log_id, log_url, log_params, log_status, log_message, log_ua, log_controller,
-                                log_method, log_time, log_result, log_ip, created_by)
-        values (#{logId}, #{logUrl}, #{logParams}, #{logStatus}, #{logMessage}, #{logUa}, #{logController},
-                #{logMethod}, #{logTime}, #{logResult},
+    <insert id="save" parameterType="com.lbj.pochi.pojo.SysLog">
+        insert into mg_sys_log (log_id, log_url, log_params, log_status, log_message, log_ua,
+                                log_controller,log_method, log_time, log_result, log_ip, created_by)
+        values (#{logId}, #{logUrl}, #{logParams}, #{logStatus}, #{logMessage}, #{logUa},
+                #{logController},#{logMethod}, #{logTime}, #{logResult},
                 #{logIp}, #{createdBy})
     </insert>
 

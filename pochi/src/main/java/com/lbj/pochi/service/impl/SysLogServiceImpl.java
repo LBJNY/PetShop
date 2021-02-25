@@ -1,6 +1,6 @@
 package com.lbj.pochi.service.impl;
 
-import com.lbj.pochi.pojo.SysLogMapper;
+import com.lbj.pochi.mapper.SysLogMapper;
 import com.lbj.pochi.pojo.SysLog;
 import com.lbj.pochi.service.SysLogService;
 import com.lbj.pochi.utils.IdWorker;
@@ -20,6 +20,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public void save(SysLog logger) {
         logger.setLogId(idWorker.nextId());
+        logger.setCreatedBy("admin");
         sysLogMapper.save(logger);
     }
 }

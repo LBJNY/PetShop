@@ -31,6 +31,7 @@ public class SystemContext {
     public static SystemContext get() {
         if (threadLocal.get() == null) {
             SystemContext threadLocalContext = new SystemContext();
+
             threadLocal.set(threadLocalContext);
         }
         return threadLocal.get();

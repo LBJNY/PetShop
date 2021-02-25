@@ -104,24 +104,17 @@ public class RequestAspect {
         //此处修改过
         SysLog sysLog = SystemContext.get().getLogger();
         sysLog.setLogTime(time);
-        return ob;
-    }
 
-    /**
-     * 后置通知
-     *
-     * @param ret
-     */
-    @AfterReturning(returning = "ret", pointcut = "logPointCut()")
-    public void doAfter(Object ret) {
-        String result = JSON.toJSONString(ret);
+        String result = JSON.toJSONString(ob);
         log.info("返回值：{}", result);
         //此处修改过
-        SysLog sysLog = SystemContext.get().getLogger();
         sysLog.setLogResult(result);
         sysLogService.save(sysLog);
         SystemContext.get().remove();
+        return ob;
     }
+
+
 
     /**
      * 异常通知，发生异常走这里
