@@ -3,7 +3,9 @@ package com.lbj.pochi.controller;
 import com.lbj.pochi.enums.ResultEnum;
 import com.lbj.pochi.enums.StateEnums;
 import com.lbj.pochi.pojo.SysUser;
+import com.lbj.pochi.pojo.SysUserRole;
 import com.lbj.pochi.pojo.TokenVo;
+import com.lbj.pochi.pojo.vo.SysUserVo;
 import com.lbj.pochi.service.SysUserService;
 import com.lbj.pochi.utils.Page;
 import com.lbj.pochi.utils.Result;
@@ -51,31 +53,31 @@ public class SysUserController {
     /**
      * 保存用户
      *
-     * @param sysUser
+     * @param sysUserVo
      * @return
      */
     @PostMapping("/save")
-    public Result<?> save(@RequestBody SysUser sysUser) {
+    public Result<?> save(@RequestBody SysUserVo sysUserVo) {
         //做参数校验--用户名&&密码
-        if (StringUtils.isBlank(sysUser.getUsername())) {
+        if (StringUtils.isBlank(sysUserVo.getUsername())) {
             return new Result<>(ResultEnum.PARAMS_NULL, "用户名不能为空!");
         }
-        if (StringUtils.isBlank(sysUser.getPassword())) {
+        if (StringUtils.isBlank(sysUserVo.getPassword())) {
             return new Result<>(ResultEnum.PARAMS_NULL, "密码不能为空!");
         }
-        sysUserService.save(sysUser);
+        sysUserService.save(sysUserVo);
         return new Result<>("添加成功!");
     }
 
     /**
      * 更新用户--一般不提供更新密码功能
      *
-     * @param sysUser
+     * @param sysUserVo
      * @return
      */
     @PutMapping("/update")
-    public Result<?> update(@RequestBody SysUser sysUser) {
-        sysUserService.update(sysUser);
+    public Result<?> update(@RequestBody SysUserVo sysUserVo) {
+        sysUserService.update(sysUserVo);
         return new Result<>("修改成功!");
     }
 
@@ -91,12 +93,22 @@ public class SysUserController {
         return new Result<>("删除成功!");
     }
 
+    /**
+     * 启用用户
+     * @param id
+     * @return
+     */
     @PutMapping("/enable/{id}")
     public Result<?> enable(@PathVariable Long id) {
         sysUserService.enable(id);
         return new Result<>("启用成功!");
     }
 
+    /**
+     * 禁用用户
+     * @param id
+     * @return
+     */
     @PutMapping("/disable/{id}")
     public Result<?> disable(@PathVariable Long id) {
         sysUserService.disable(id);
@@ -110,9 +122,9 @@ public class SysUserController {
      * @return
      */
     @GetMapping(value = "/get/{id}")
-    public Result<SysUser> get(@PathVariable Long id) {
-        SysUser sysUser = sysUserService.get(id);
-        return new Result<>(sysUser);
+    public Result<SysUserVo> get(@PathVariable Long id) {
+        SysUserVo sysUserVo = sysUserService.get(id);
+        return new Result<>(sysUserVo);
     }
 
     /**

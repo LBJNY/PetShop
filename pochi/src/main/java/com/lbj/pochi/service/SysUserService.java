@@ -1,6 +1,7 @@
 package com.lbj.pochi.service;
 
 import com.lbj.pochi.pojo.SysUser;
+import com.lbj.pochi.pojo.vo.SysUserVo;
 import com.lbj.pochi.utils.Page;
 
 public interface SysUserService {
@@ -22,16 +23,16 @@ public interface SysUserService {
     /**
      * 添加用户信息
      *
-     * @param sysUser
+     * @param sysUserVo
      */
-    void save(SysUser sysUser);
+    void save(SysUserVo sysUserVo);
 
     /**
      * 更新用户信息
      *
-     * @param sysUser
+     * @param sysUserVo
      */
-    void update(SysUser sysUser);
+    void update(SysUserVo sysUserVo);
 
     /**
      * 删除用户信息
@@ -63,7 +64,7 @@ public interface SysUserService {
      * @param id
      * @return
      */
-    SysUser get(Long id);
+    SysUserVo get(Long id);
 
     /**
      * 分页查询用户信息

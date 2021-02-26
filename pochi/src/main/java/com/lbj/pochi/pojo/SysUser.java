@@ -29,7 +29,7 @@ public class SysUser  implements Serializable {
     /**
      * 微信小程序openid
      */
-    private String openid;
+    private String openId;
     /**
      * 密码
      */

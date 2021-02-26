@@ -1,5 +1,6 @@
 package com.lbj.pochi.mapper;
 
+import com.lbj.pochi.pojo.SysRole;
 import com.lbj.pochi.pojo.SysUser;
 import com.lbj.pochi.utils.Page;
 import org.springframework.stereotype.Component;
@@ -53,7 +54,19 @@ public interface SysUserMapper {
      */
     void updateStatus(SysUser sysUser);
 
+    /**
+     * 分页查询
+     * @param page
+     * @return
+     */
     List<SysUser> getByPage(Page<SysUser> page);
 
+    /**
+     * 查询总条数
+     * @param page
+     * @return
+     */
     Integer countByPage(Page<SysUser> page);
+
+
 }
