@@ -17,7 +17,8 @@ public enum ResultEnum {
     PARAMS_ERROR(40005, "参数不合法！"),
 
     NOT_LOGIN(40003, "当前账号未登录！"),
-    LOGIN_PARAM_ERROR(40007,"用户名或密码错误")
+    LOGIN_PARAM_ERROR(40007,"用户名或密码错误"),
+    MENU_EXISTS(40008,"菜单已存在")
     ;
     private Integer code;
     private String msg;

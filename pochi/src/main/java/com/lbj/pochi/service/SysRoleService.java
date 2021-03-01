@@ -1,24 +1,28 @@
 package com.lbj.pochi.service;
 
 import com.lbj.pochi.pojo.SysRole;
+import com.lbj.pochi.pojo.vo.SysRoleVo;
 import com.lbj.pochi.utils.Page;
 
 import java.util.List;
 
+/**
+ * 角色service类
+ */
 public interface SysRoleService {
     /**
      * 添加角色
      *
-     * @param sysRole
+     * @param sysRoleVo
      */
-    void save(SysRole sysRole);
+    void save(SysRoleVo sysRoleVo);
 
     /**
      * 修改角色
      *
-     * @param sysRole
+     * @param sysRoleVo
      */
-    void update(SysRole sysRole);
+    void update(SysRoleVo sysRoleVo);
 
     /**
      * 删除角色--逻辑删除
@@ -33,7 +37,7 @@ public interface SysRoleService {
      * @param id
      * @return
      */
-    SysRole get(Long id);
+    SysRoleVo get(Long id);
 
     /**
      * 分页获取角色列表

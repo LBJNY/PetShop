@@ -1,6 +1,7 @@
 package com.lbj.pochi.controller;
 
 import com.lbj.pochi.pojo.SysRole;
+import com.lbj.pochi.pojo.vo.SysRoleVo;
 import com.lbj.pochi.service.SysRoleService;
 import com.lbj.pochi.utils.Page;
 import com.lbj.pochi.utils.Result;
@@ -18,24 +19,24 @@ public class SysRoleController {
     /**
      * 添加角色
      *
-     * @param sysRole
+     * @param sysRoleVo
      * @return
      */
     @PostMapping("/save")
-    public Result<?> save(@RequestBody SysRole sysRole) {
-        sysRoleService.save(sysRole);
+    public Result<?> save(@RequestBody SysRoleVo sysRoleVo) {
+        sysRoleService.save(sysRoleVo);
         return new Result<>("添加成功");
     }
 
     /**
      * 修改角色
      *
-     * @param sysRole
+     * @param sysRoleVo
      * @return
      */
     @PutMapping("/update")
-    public Result<?> update(@RequestBody SysRole sysRole) {
-        sysRoleService.update(sysRole);
+    public Result<?> update(@RequestBody SysRoleVo sysRoleVo) {
+        sysRoleService.update(sysRoleVo);
         return new Result<>("修改成功");
     }
 
@@ -58,9 +59,9 @@ public class SysRoleController {
      * @return
      */
     @GetMapping("/get/{id}")
-    public Result<SysRole> get(@PathVariable Long id) {
-        SysRole sysRole = sysRoleService.get(id);
-        return new Result<>(sysRole);
+    public Result<SysRoleVo> get(@PathVariable Long id) {
+        SysRoleVo sysRoleVo = sysRoleService.get(id);
+        return new Result<>(sysRoleVo);
     }
 
     /**

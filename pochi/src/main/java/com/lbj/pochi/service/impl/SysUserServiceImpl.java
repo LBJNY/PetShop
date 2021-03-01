@@ -20,7 +20,9 @@ import org.springframework.util.CollectionUtils;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * 用户service实现类
+ */
 @Service
 public class SysUserServiceImpl implements SysUserService {
 
@@ -33,16 +35,29 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private IdWorker idWorker;
 
+    /**
+     * 根据用户名更新登陆时间
+     * @param username 用户名
+     */
     @Override
     public void updateLoginTime(String username) {
         sysUserMapper.updateLoginTime(username);
     }
 
+    /**
+     * 根据用户名获取用户信息
+     * @param username
+     * @return
+     */
     @Override
     public SysUser getByUserName(String username) {
         return sysUserMapper.getByUserName(username);
     }
 
+    /**
+     * 添加用户
+     * @param sysUserVo
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(SysUserVo sysUserVo) {
@@ -61,6 +76,10 @@ public class SysUserServiceImpl implements SysUserService {
         }
     }
 
+    /**
+     * 更新用户信息
+     * @param sysUserVo
+     */
     @Override
     public void update(SysUserVo sysUserVo) {
         //拷贝数据
@@ -77,11 +96,19 @@ public class SysUserServiceImpl implements SysUserService {
         }
     }
 
+    /**
+     * 根据id删除用户信息
+     * @param id
+     */
     @Override
     public void delete(Long id) {
         sysUserMapper.delete(id);
     }
 
+    /**
+     * 启用用户
+     * @param id
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void enable(Long id) {
@@ -90,6 +117,10 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserMapper.updateStatus(sysUser);
     }
 
+    /**
+     * 禁用用户
+     * @param id
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void disable(Long id) {
@@ -98,6 +129,11 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserMapper.updateStatus(sysUser);
     }
 
+    /**
+     * 根据用户id获取用户
+     * @param id
+     * @return
+     */
     @Override
     public SysUserVo get(Long id) {
         SysUser sysUser = sysUserMapper.getById(id);
@@ -114,10 +150,17 @@ public class SysUserServiceImpl implements SysUserService {
             if (!CollectionUtils.isEmpty(roleList)) {
                 sysUserVo.setSysRole(roleList.get(0));
             }
+        }else {
+            sysUserVo.setSysRole(new SysRole());
         }
         return sysUserVo;
     }
 
+    /**
+     * 分页查询用户信息
+     * @param page
+     * @return
+     */
     @Override
     public Page<SysUser> getByPage(Page<SysUser> page) {
         Integer pageNumber = page.getCurrentPage();

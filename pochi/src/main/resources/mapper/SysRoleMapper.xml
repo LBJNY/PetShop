@@ -11,10 +11,10 @@
         <result column="update_time" property="updateTime"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
-    <sql id="baseColumn">
+    <sql id="baseColumn" >
         role_id,role_name,role_sort,create_by,create_time,update_by,update_time,deleted
     </sql>
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true" keyColumn="role_id" keyProperty="roleId">
         insert into sys_role(role_name, role_sort, create_by, update_by)
         VALUES (#{roleName}, #{roleSort}, #{createBy}, #{updateBy})
     </insert>

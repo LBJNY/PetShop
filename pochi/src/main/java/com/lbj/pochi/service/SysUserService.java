@@ -4,6 +4,9 @@ import com.lbj.pochi.pojo.SysUser;
 import com.lbj.pochi.pojo.vo.SysUserVo;
 import com.lbj.pochi.utils.Page;
 
+/**
+ * 用户service类
+ */
 public interface SysUserService {
     /**
      * 更新用户登陆时间
@@ -68,6 +71,7 @@ public interface SysUserService {
 
     /**
      * 分页查询用户信息
+     *
      * @param page
      * @return
      */
