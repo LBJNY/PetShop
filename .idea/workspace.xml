@@ -1,35 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="feabea6a-93e8-4f95-8fc5-504926b766ee" name="Default Changelist" comment="前端角色,用户管理编写改造">
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/controller/SysMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/mapper/SysMenuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/mapper/SysRoleMenuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/pojo/SysMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/pojo/SysRoleMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/pojo/vo/SysMenuVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/pojo/vo/SysRoleVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/SysMenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysMenuServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/resources/mapper/SysMenuMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pochi/src/main/resources/mapper/SysRoleMenuMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/advice/PochiExceptionAdvice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/aop/RequestAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/aop/RequestAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/constant/CoreConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/constant/CoreConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/context/SystemContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/context/SystemContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/controller/SysRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/controller/SysRoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/enums/ResultEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/enums/ResultEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/pojo/SysLogMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/SysRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/SysRoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/SysUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysLogServiceImpl.java" afterDir="false" />
+    <list default="true" id="feabea6a-93e8-4f95-8fc5-504926b766ee" name="Default Changelist" comment="角色菜单关联,前后端改造">
       <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysRoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/service/impl/SysUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/utils/ShiroUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/java/com/lbj/pochi/utils/ShiroUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/resources/mapper/SysLogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/resources/mapper/SysLogMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pochi/src/main/resources/mapper/SysRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pochi/src/main/resources/mapper/SysRoleMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../【波奇商城】教学资源.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../【波奇商城】教学资源/代码/pochi" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../【波奇商城】教学资源/代码/pochi_admin" beforeDir="false" />
@@ -417,6 +390,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ChangesTree.GroupingKeys" value="module&#10;directory" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -478,7 +452,7 @@
       <workItem from="1614148630434" duration="211000" />
       <workItem from="1614148861153" duration="153000" />
       <workItem from="1614149031817" duration="37623000" />
-      <workItem from="1614560187752" duration="2817000" />
+      <workItem from="1614560187752" duration="3938000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1612161028927</created>
@@ -540,14 +514,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="958" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1614561452891" />
-    <state x="370" y="0" key="CommitChangelistDialog2" timestamp="1614563711431">
+    <state x="370" y="0" key="CommitChangelistDialog2" timestamp="1614567686430">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="370" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1614563711431" />
+    <state x="370" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1614567686430" />
     <state width="412" height="618" key="DebuggerActiveHint" timestamp="1614236459546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="412" height="618" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1614236459546" />
+    <state x="147" y="65" key="DiffContextDialog" timestamp="1614567628803">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1614567628803" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1614148580344">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

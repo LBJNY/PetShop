@@ -27,8 +27,10 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Autowired
     private SysRoleMenuMapper sysRoleMenuMapper;
+
     /**
      * 添加角色
+     *
      * @param sysRoleVo
      */
     @Override
@@ -36,11 +38,11 @@ public class SysRoleServiceImpl implements SysRoleService {
         // 设置创建人和修改人为用户名
         SysUser loginUser = ShiroUtils.getLoginUser();
         //拷贝属性值
-        SysRole sysRole=new SysRole();
+        SysRole sysRole = new SysRole();
         BeanUtils.copyProperties(sysRoleVo, sysRole);
 
         assert loginUser != null;
-        String username=loginUser.getUsername();
+        String username = loginUser.getUsername();
         sysRole.setCreateBy(username);
         sysRole.setUpdateBy(username);
         sysRoleMapper.save(sysRole);
@@ -51,6 +53,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 更新角色
+     *
      * @param sysRoleVo
      */
     @Override
@@ -58,11 +61,11 @@ public class SysRoleServiceImpl implements SysRoleService {
         // 设置创建人和修改人为用户名
         SysUser loginUser = ShiroUtils.getLoginUser();
         //拷贝属性值
-        SysRole sysRole=new SysRole();
+        SysRole sysRole = new SysRole();
         BeanUtils.copyProperties(sysRoleVo, sysRole);
 
         assert loginUser != null;
-        String username=loginUser.getUsername();
+        String username = loginUser.getUsername();
         sysRole.setUpdateBy(username);
         sysRoleMapper.update(sysRole);
 
@@ -74,12 +77,13 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 保存角色菜单数据
+     *
      * @param sysRoleVo
      * @param sysRole
      */
     private void saveRoleMenu(SysRoleVo sysRoleVo, SysRole sysRole) {
-        if (!CollectionUtils.isEmpty(sysRoleVo.getAuthIds())){
-            List<SysRoleMenu>  roleMenuList = sysRoleVo.getAuthIds().stream().map(id -> {
+        if (!CollectionUtils.isEmpty(sysRoleVo.getAuthIds())) {
+            List<SysRoleMenu> roleMenuList = sysRoleVo.getAuthIds().stream().map(id -> {
                 SysRoleMenu sysRoleMenu = new SysRoleMenu();
                 // 设置菜单ID和角色ID
                 sysRoleMenu.setMenuId(id);
@@ -93,6 +97,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 删除角色
+     *
      * @param id
      */
     @Override
@@ -102,6 +107,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 获取角色
+     *
      * @param id
      * @return
      */
@@ -114,7 +120,7 @@ public class SysRoleServiceImpl implements SysRoleService {
         // 查询这个角色存在的所有权限
         List<SysRoleMenu> roleMenuList = sysRoleMenuMapper.getByRoleId(id);
         // 如果角色权限集合不为空，取出菜单ID集合
-        if(!CollectionUtils.isEmpty(roleMenuList)) {
+        if (!CollectionUtils.isEmpty(roleMenuList)) {
             // 取出权限ID集合
             List<Long> authIds = roleMenuList.stream().map(SysRoleMenu::getMenuId).collect(Collectors.toList());
             vo.setAuthIds(authIds);
@@ -124,6 +130,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 分页查询角色信息
+     *
      * @param page
      * @return
      */
@@ -144,6 +151,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 获取所有角色信息
+     *
      * @return
      */
     @Override
