@@ -31,6 +31,13 @@ public enum StateEnums {
      */
     REQUEST_SUCCESS(1, "请求正常"),
     REQUEST_ERROR(0, "请求异常"),
+
+    /**
+     * 菜单状态枚举
+     */
+    FOLDER(1,"目录"),
+    MENU(2,"菜单"),
+    AUTH(3,"权限"),
     ;
 
     private Integer code;

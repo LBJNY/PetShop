@@ -1,6 +1,7 @@
 package com.lbj.pochi.controller;
 
 import com.lbj.pochi.pojo.SysMenu;
+import com.lbj.pochi.pojo.vo.RouterVo;
 import com.lbj.pochi.pojo.vo.SysMenuVo;
 import com.lbj.pochi.service.SysMenuService;
 import com.lbj.pochi.utils.Page;
@@ -94,5 +95,11 @@ public class SysMenuController {
     public Result<List<Long>> getRoleSelectMenu(@PathVariable Long roleId) {
         List<Long> ids = sysMenuService.getRoleSelectMenu(roleId);
         return new Result<>(ids);
+    }
+
+    @GetMapping("getRouters")
+    public Result<List<RouterVo>> getRouters(){
+        List<RouterVo> list=sysMenuService.getRouters();
+        return  new Result<>(list);
     }
 }

@@ -5,6 +5,7 @@ import com.lbj.pochi.pojo.SysRole;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 系统用户视图类
@@ -77,5 +78,9 @@ public class SysUserVo implements Serializable {
      */
     private SysRole sysRole;
 
+    /**
+     * 权限列表
+     */
+    private List<String> auths;
 }
 

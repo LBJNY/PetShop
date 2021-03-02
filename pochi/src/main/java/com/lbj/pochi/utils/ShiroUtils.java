@@ -1,6 +1,7 @@
 package com.lbj.pochi.utils;
 
 import com.lbj.pochi.pojo.SysUser;
+import com.lbj.pochi.pojo.vo.SysUserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -22,13 +23,13 @@ public class ShiroUtils {
      *
      * @return
      */
-    public static SysUser getLoginUser() {
+    public static SysUserVo getLoginUser() {
         Session session = SecurityUtils.getSubject().getSession();
         SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
         if (principalCollection == null) {
             return null;
         }
-        return (SysUser) principalCollection.getPrimaryPrincipal();
+        return (SysUserVo) principalCollection.getPrimaryPrincipal();
     }
 
     public static String getToken() {

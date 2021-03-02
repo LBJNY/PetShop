@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,7 @@ public class SysUserController {
      * @return
      */
     @DeleteMapping("/delete/{id}")
+    @RequiresPermissions("sys:user:delete")
     public Result<?> delete(@PathVariable Long id) {
         sysUserService.delete(id);
         return new Result<>("删除成功!");
@@ -162,11 +164,10 @@ public class SysUserController {
      * @return
      */
     @GetMapping("/info")
-    public Result<SysUser> info() {
-        SysUser loginUser = ShiroUtils.getLoginUser();
+    public Result<SysUserVo> info() {
+        SysUserVo loginUser = ShiroUtils.getLoginUser();
         loginUser.setPassword(null);
         loginUser.setStatus(null);
-        loginUser.setDeleted(null);
         return new Result<>(loginUser);
     }
 

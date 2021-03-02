@@ -156,4 +156,27 @@
             where tm.deleted = 0
         )
     </select>
+    <select id="getEnableMenuByUserId" resultMap="BaseResultMap">
+        select *
+        from sys_menu m
+                 inner join sys_role_menu srm on m.menu_id = srm.menu_id
+                 inner join sys_role sr on srm.role_id = sr.role_id
+                 inner join sys_user_role sur on sr.role_id = sur.role_id
+        where m.status = 1
+          and m.deleted = 0
+          and m.menu_type in (1, 2)
+          and sur.user_id = #{userId}
+        order by m.order_num
+    </select>
+    <select id="getMenuCodeByUserId" resultType="java.lang.String">
+        select m.permission
+        from sys_menu m
+                 inner join sys_role_menu srm on m.menu_id = srm.menu_id
+                 inner join sys_role sr on srm.role_id = sr.role_id
+                 inner join sys_user_role sur on sr.role_id = sur.role_id
+        where m.status = 1
+          and m.deleted = 0
+          and sur.user_id = #{userId}
+          and permission is not null
+    </select>
 </mapper>

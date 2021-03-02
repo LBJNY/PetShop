@@ -60,7 +60,25 @@ public interface SysMenuMapper {
      */
     List<SysMenu> getByPage(Page<SysMenu> page);
 
+    /**
+     * 获取所有菜单
+     * @return
+     */
     List<SysMenu> getAll();
 
+    /**
+     * 根据角色Id获取所有菜单
+     * @param roleId
+     * @return
+     */
     List<SysMenu> getRoleSelectMenu(Long roleId);
+
+    /**
+     * 根据用户ID查询启用中的菜单（权限不查）
+     * @param id
+     * @return
+     */
+    List<SysMenu> getEnableMenuByUserId(Long id);
+
+    List<String> getMenuCodeByUserId(Long userId);
 }

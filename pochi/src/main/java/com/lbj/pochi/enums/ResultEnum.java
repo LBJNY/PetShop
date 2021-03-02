@@ -18,7 +18,12 @@ public enum ResultEnum {
 
     NOT_LOGIN(40003, "当前账号未登录！"),
     LOGIN_PARAM_ERROR(40007,"用户名或密码错误"),
-    MENU_EXISTS(40008,"菜单已存在")
+    MENU_EXISTS(40008,"菜单已存在"),
+
+    FILE_TYPE_ERROR(4009,"文件类型不支持"),
+    DIR_NOT_FOUND(40010,"文件夹不存在"),
+    FILE_TOO_LARGE(40011,"文件过大"),
+    AUTH_NOT_FOUND(40012,"权限不足"),
     ;
     private Integer code;
     private String msg;
