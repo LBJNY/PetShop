@@ -97,6 +97,10 @@ public class SysMenuController {
         return new Result<>(ids);
     }
 
+    /**
+     * 获取路由列表
+     * @return
+     */
     @GetMapping("getRouters")
     public Result<List<RouterVo>> getRouters(){
         List<RouterVo> list=sysMenuService.getRouters();

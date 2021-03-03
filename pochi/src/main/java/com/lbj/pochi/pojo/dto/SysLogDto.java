@@ -5,6 +5,13 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 这里可以使用page
+ * 但是这个查询是mongoDb
+ * 无需多维度查询
+ * 使代码可读性更强
+ * 这里使用实体类
+ */
 @Data
 public class SysLogDto implements Serializable {
 

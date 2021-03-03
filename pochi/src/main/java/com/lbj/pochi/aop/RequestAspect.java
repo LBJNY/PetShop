@@ -25,6 +25,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ *
  */
 @Aspect
 @Component
@@ -33,6 +34,21 @@ public class RequestAspect {
 
     @Autowired
     private SysLogService sysLogService;
+
+    /**
+     * 不记录日志的接口
+     */
+    private static final String[] EXCLUDE_URLS = {"/sysLog/"};
+
+
+    private boolean exclude(String url) {
+        for (String excludeUrl : EXCLUDE_URLS) {
+            if (url.contains(excludeUrl)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * 声明切点
@@ -58,33 +74,36 @@ public class RequestAspect {
         // 获取请求地址
         String uri = request.getRequestURI();
         // 记录日志
-        // 日志输出基本信息
-        log.info("请求地址：{}", uri);
-        log.info("请求方式：{}", request.getMethod());
-        // 获取请求IP
-        String remoteIp = StringUtils.getRemoteIp(request);
-        log.info("IP：{}", remoteIp);
-        // 获取请求的controller
-        String controllerName = joinPoint.getSignature().getDeclaringTypeName();
-        log.info("方法：{}.{}", controllerName, joinPoint.getSignature().getName());
-        // 记录参数
-        Object[] args = joinPoint.getArgs();
-        // 记录日志条件：参数不为空，并且第一个参数不是request也不是MultipartFile
-        boolean logParamFlag = args != null && args.length > 0 && !(args[0] instanceof ServletRequest) && !(args[0] instanceof MultipartFile);
-        //此处修改过
-        SysLog sysLog = SystemContext.get().getLogger();
-        if (logParamFlag) {
-            String param = JSON.toJSONString(args[0]);
-            log.info("请求参数：{}", param);
-            sysLog.setLogParams(param);
+        if (!exclude(uri)) {
+            // 日志输出基本信息
+            log.info("请求地址：{}", uri);
+            log.info("请求方式：{}", request.getMethod());
+            // 获取请求IP
+            String remoteIp = StringUtils.getRemoteIp(request);
+            log.info("IP：{}", remoteIp);
+            // 获取请求的controller
+            String controllerName = joinPoint.getSignature().getDeclaringTypeName();
+            log.info("方法：{}.{}", controllerName, joinPoint.getSignature().getName());
+            // 记录参数
+            Object[] args = joinPoint.getArgs();
+            // 记录日志条件：参数不为空，并且第一个参数不是request也不是MultipartFile
+            boolean logParamFlag = args != null && args.length > 0 && !(args[0] instanceof ServletRequest) && !(args[0] instanceof MultipartFile);
+            //此处修改过
+            SysLog sysLog = SystemContext.get().getLogger();
+            if (logParamFlag) {
+                String param = JSON.toJSONString(args[0]);
+                log.info("请求参数：{}", param);
+                sysLog.setLogParams(param);
+            }
+            // 记录日志
+            sysLog.setLogUrl(uri);
+            sysLog.setLogStatus(StateEnums.REQUEST_SUCCESS.getCode());
+            sysLog.setLogMethod(request.getMethod());
+            sysLog.setLogIp(remoteIp);
+            sysLog.setLogUa(request.getHeader("user-Agent"));
+            sysLog.setLogController(controllerName);
         }
-        // 记录日志
-        sysLog.setLogUrl(uri);
-        sysLog.setLogStatus(StateEnums.REQUEST_SUCCESS.getCode());
-        sysLog.setLogMethod(request.getMethod());
-        sysLog.setLogIp(remoteIp);
-        sysLog.setLogUa(request.getHeader("user-Agent"));
-        sysLog.setLogController(controllerName);
+
     }
 
     /**
@@ -96,24 +115,34 @@ public class RequestAspect {
      */
     @Around("logPointCut()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+        // 接收到请求，记录请求内容
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert attributes != null;
+        // 获取request
+        HttpServletRequest request = attributes.getRequest();
+        // 获取请求地址
+        String uri = request.getRequestURI();
+
         // 记录方法执行时间
         long startTime = System.currentTimeMillis();
         Object ob = pjp.proceed();
         long time = System.currentTimeMillis() - startTime;
         log.info("方法执行耗时：{}", time);
-        //此处修改过
-        SysLog sysLog = SystemContext.get().getLogger();
-        sysLog.setLogTime(time);
+        if (!exclude(uri)) {
+            //此处修改过
+            SysLog sysLog = SystemContext.get().getLogger();
+            sysLog.setLogTime(time);
 
-        String result = JSON.toJSONString(ob);
-        log.info("返回值：{}", result);
-        //此处修改过
-        sysLog.setLogResult(result);
-        sysLogService.save(sysLog);
+            String result = JSON.toJSONString(ob);
+            log.info("返回值：{}", result);
+            //此处修改过
+            sysLog.setLogResult(result);
+            sysLogService.save(sysLog);
+        }
+
         SystemContext.get().remove();
         return ob;
     }
-
 
 
     /**
@@ -124,12 +153,22 @@ public class RequestAspect {
      */
     @AfterThrowing(pointcut = "logPointCut()", throwing = "throwable")
     public void doException(JoinPoint joinPoint, Throwable throwable) {
-        //此处修改过
-        SysLog sysLog = SystemContext.get().getLogger();
-        sysLog.setLogStatus(StateEnums.REQUEST_ERROR.getCode());
-        sysLog.setLogMessage(throwable.getMessage());
-        sysLog.setLogTime(0L);
-        sysLogService.save(sysLog);
+        // 接收到请求，记录请求内容
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert attributes != null;
+        // 获取request
+        HttpServletRequest request = attributes.getRequest();
+        // 获取请求地址
+        String uri = request.getRequestURI();
+        if (!exclude(uri)) {
+            //此处修改过
+            SysLog sysLog = SystemContext.get().getLogger();
+            sysLog.setLogStatus(StateEnums.REQUEST_ERROR.getCode());
+            sysLog.setLogMessage(throwable.getMessage());
+            sysLog.setLogTime(0L);
+            sysLogService.save(sysLog);
+        }
+
         SystemContext.get().remove();
     }
 

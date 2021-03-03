@@ -112,5 +112,11 @@ public class Page<T> implements Serializable {
         }
     }
 
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+        if (this.currentPage == null || this.currentPage   < 1) {
+            this.currentPage  = 1;
+        }
+    }
 }
 

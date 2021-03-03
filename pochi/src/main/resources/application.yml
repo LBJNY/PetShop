@@ -28,3 +28,25 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.lbj.pochi
+
+# OSS相关配置信息
+aliyun:
+  oss:
+    endpoint: http://oss-cn-beijing.aliyuncs.com # oss对外服务的访问域名
+    access-key-id: LTAI4GEMrurMVHqybPFNyuAL # 访问身份验证中用到用户标识
+    access-key-secret: dFUBClIbzXEj1suHiREkOGICSTRPjE # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucket-name: pochishop # oss的存储空间
+    view-url: https://pochishop.oss-cn-beijing.aliyuncs.com # 预览url
+    max-size: 10 # 最大文件大小，单位M
+    upload-dirs: # 上传的目录
+      - header
+      - types
+      - product
+      - banner
+      - markdown
+      - tinymce
+    image-types: # 上传后缀
+      - JPG
+      - PNG
+      - JPEG
+      - GIF

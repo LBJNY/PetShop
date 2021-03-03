@@ -25,12 +25,12 @@ public interface SysLogService {
      * 根据id删除日志
      * @param id
      */
-    void delete(String id);
+    void delete(Long id);
 
     /**
      * 根据id获取日志
      * @param id
      * @return
      */
-    SysLog get(String id);
+    SysLog get(Long id);
 }

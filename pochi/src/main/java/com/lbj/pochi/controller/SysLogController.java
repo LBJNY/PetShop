@@ -20,28 +20,31 @@ public class SysLogController {
 
     /**
      * 根据ID查询
+     *
      * @param id
      * @return
      */
     @GetMapping(value = "/get/{id}")
-    public Result<SysLog> get(@PathVariable String id) {
+    public Result<SysLog> get(@PathVariable Long id) {
         SysLog sysLog = sysLogService.get(id);
         return new Result<>(sysLog);
     }
 
     /**
      * 根据id删除
+     *
      * @param id
      * @return
      */
     @DeleteMapping(value = "/delete/{id}")
-    public Result<?> delete(@PathVariable String id) {
+    public Result<?> delete(@PathVariable Long id) {
         sysLogService.delete(id);
         return new Result<>("删除成功");
     }
 
     /**
      * 分页查询
+     *
      * @param sysLogDto
      * @return
      */
