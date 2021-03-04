@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lbj.pochi.mapper.ShopProductCategoryMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lbj.pochi.pojo.ShopProductCategory">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="nav_status" property="navStatus"/>
+        <result column="sort" property="sort"/>
+        <result column="icon" property="icon"/>
+    </resultMap>
+    <insert id="save">
+        insert into shop_product_category(parent_id, name, level, nav_status, sort, icon)
+            value (
+                   #{parentId}, #{name},
+                   #{level}, #{navStatus},
+                   #{sort}, #{icon}
+            )
+    </insert>
+    <update id="update">
+        update shop_product_category
+        set parent_id = #{parentId}
+        <if test="name!=null and name!=''">
+            ,name = #{name}
+        </if>
+        <if test="icon!=null and icon!=''">
+            ,icon = #{icon}
+        </if>
+        <if test="level!=null">
+            ,level = #{level}
+        </if>
+        <if test="navStatus!=null">
+            ,nav_status = #{navStatus}
+        </if>
+        <if test="sort!=null">
+            ,sort = #{sort}
+        </if>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from shop_product_category
+        where id = #{id}
+    </delete>
+    <select id="getByParentIdAndName" resultMap="BaseResultMap">
+        select id,
+               parent_id,
+               name
+        from shop_product_category
+        where parent_id = #{parentId}
+          and name = #{name}
+    </select>
+    <select id="getById" resultMap="BaseResultMap">
+        select id,
+               parent_id,
+               name,
+               level,
+               nav_status,
+               sort,
+               icon
+        from shop_product_category
+        where id = #{id}
+    </select>
+    <select id="getByPage" resultMap="BaseResultMap">
+        select id,
+               parent_id,
+               name,
+               level,
+               nav_status,
+               sort,
+               icon
+        from shop_product_category
+        order by sort
+        limit #{index}, #{pageSize}
+    </select>
+    <select id="countByPage" resultType="java.lang.Integer">
+        select count(*)
+        from shop_product_category
+    </select>
+    <select id="getAll" resultMap="BaseResultMap">
+        select id,
+               parent_id,
+               name,
+               level,
+               nav_status,
+               sort,
+               icon
+        from shop_product_category
+    </select>
+    <select id="getSelectList" resultMap="BaseResultMap">
+        select id,
+               parent_id,
+               name,
+               level,
+               nav_status,
+               sort,
+               icon
+        from shop_product_category
+        where level in (1, 2)
+    </select>
+</mapper>

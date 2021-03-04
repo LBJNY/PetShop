@@ -24,6 +24,7 @@ public enum ResultEnum {
     DIR_NOT_FOUND(40010,"文件夹不存在"),
     FILE_TOO_LARGE(40011,"文件过大"),
     AUTH_NOT_FOUND(40012,"权限不足"),
+    CATEGORY_EXISTS(40013,"分类已存在"),
     ;
     private Integer code;
     private String msg;

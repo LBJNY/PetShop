@@ -40,7 +40,7 @@ aliyun:
     max-size: 10 # 最大文件大小，单位M
     upload-dirs: # 上传的目录
       - header
-      - types
+      - type
       - product
       - banner
       - markdown
