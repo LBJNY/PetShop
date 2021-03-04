@@ -73,4 +73,23 @@ public interface ShopProductCategoryMapper  {
      * @return
      */
     List<ShopProductCategory> getSelectList();
+
+    /**
+     * 获取所有1,2级别分类
+     * @param categoryIds
+     * @return
+     */
+    List<ShopProductCategory> getByIds(List<Long> categoryIds);
+
+    /**
+     * 获取所有二级分类
+     * @return
+     */
+    List<ShopProductCategory> getAllSecond();
+
+    /**
+     * 查询所有顶级分类
+     * @return
+     */
+    List<ShopProductCategory> getAllTop();
 }

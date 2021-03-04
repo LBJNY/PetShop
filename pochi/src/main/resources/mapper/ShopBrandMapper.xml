@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lbj.pochi.mapper.ShopBrandMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lbj.pochi.pojo.ShopBrand">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sort" property="sort"/>
+        <result column="show_status" property="showStatus"/>
+        <result column="logo" property="logo"/>
+    </resultMap>
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into shop_brand(name, sort, show_status, logo)
+        values (#{name}, #{sort}, #{showStatus}, #{logo})
+    </insert>
+    <update id="update">
+        update shop_brand
+        <set>
+            <if test="name!=null and name!=''">
+                name = #{name},
+            </if>
+            <if test="logo!=null and logo!=''">
+                logo = #{logo},
+            </if>
+            <if test="sort!=null">
+                sort = #{sort},
+            </if>
+            <if test="showStatus!=null">
+                show_status = #{showStatus}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete
+        from shop_brand
+        where id = #{id}
+    </delete>
+    <select id="get" resultMap="BaseResultMap">
+        select id, name, sort, show_status, logo
+        from shop_brand
+        where id = #{id}
+    </select>
+    <select id="getByPage" resultMap="BaseResultMap">
+        select id, name, sort, show_status, logo
+        from shop_brand
+        <where>
+            <if test="params.name!=null">
+                name like concat('%',#{params.name} ,'%')
+            </if>
+        </where>
+        order by sort
+        limit #{index}, #{pageSize}
+    </select>
+    <select id="countByPage" resultType="java.lang.Integer">
+        select count(*)
+        from shop_brand
+        <where>
+            <if test="params.name!=null">
+                name like concat('%',#{params.name} ,'%')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

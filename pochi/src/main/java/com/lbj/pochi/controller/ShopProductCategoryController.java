@@ -101,4 +101,13 @@ public class ShopProductCategoryController {
         return new Result<>(list);
     }
 
+    /**
+     * 查询所有二级分类
+     * @return
+     */
+    @RequestMapping(value = "/getAllSecond",method = RequestMethod.GET)
+    public Result<List<ShopProductCategory>> getAll(){
+        List<ShopProductCategory> list=shopProductCategoryService.getAllSecond();
+        return new Result<>(list);
+    }
 }

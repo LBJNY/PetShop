@@ -61,4 +61,9 @@ public interface ShopProductCategoryService {
      */
     List<ShopProductCategoryVo> getSelectTree();
 
+    /**
+     * 获取所有二级分类
+     * @return
+     */
+    List<ShopProductCategory> getAllSecond();
 }

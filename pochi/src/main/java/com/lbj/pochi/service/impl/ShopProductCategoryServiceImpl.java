@@ -159,6 +159,27 @@ public class ShopProductCategoryServiceImpl implements ShopProductCategoryServic
     }
 
     /**
+     * 获取所有二级分类
+     *
+     * @return
+     */
+    @Override
+    public List<ShopProductCategory> getAllSecond() {
+        List<ShopProductCategory> secondList = shopProductCategoryMapper.getAllSecond();
+        List<ShopProductCategory> topList = shopProductCategoryMapper.getAllTop();
+        //遍历一级分类和二级分类
+        secondList.forEach(s -> {
+            //便利以及分类,取出id和s.parentId相同的数据
+            ShopProductCategory parent = topList.stream().filter(t -> t.getId().equals(s.getParentId()))
+                    .findFirst().orElse(null);
+            if (parent!=null){
+                s.setName(parent.getName()+CoreConstant.CONCAT_NAME+s.getName());
+            }
+        });
+        return secondList;
+    }
+
+    /**
      * 创建树  此处主要进行顶级分类过滤  然后调用递归
      *
      * @param categoryList

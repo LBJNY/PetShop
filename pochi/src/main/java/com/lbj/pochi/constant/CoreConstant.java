@@ -32,4 +32,8 @@ public final class CoreConstant {
      * 菜单默认组件地址
      */
     public static final String DEFAULT_COMPONENT="Layout";
+    /**
+     * 名称连接符
+     */
+    public static final String CONCAT_NAME=" -> ";
 }
