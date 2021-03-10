@@ -92,4 +92,11 @@ public interface ShopProductCategoryMapper  {
      * @return
      */
     List<ShopProductCategory> getAllTop();
+
+    /**
+     * 根据分类ID获取
+     * @param categoryId
+     * @return
+     */
+    ShopProductCategory get(Long categoryId);
 }

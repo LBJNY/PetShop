@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,11 @@ public class ShopBrandServiceImpl implements ShopBrandService {
     @Autowired
     private ShopProductCategoryMapper shopProductCategoryMapper;
 
+    /**
+     * 分页查询
+     * @param page
+     * @return
+     */
     @Override
     public Page<ShopBrand> getByPage(Page<ShopBrand> page) {
         List<ShopBrand> list = shopBrandMapper.getByPage(page);
@@ -41,6 +47,11 @@ public class ShopBrandServiceImpl implements ShopBrandService {
         return page;
     }
 
+    /**
+     * 获取更新回显
+     * @param id
+     * @return
+     */
     @Override
     public ShopBrandDto getUpdate(Long id) {
         //根据ID获取
@@ -59,6 +70,11 @@ public class ShopBrandServiceImpl implements ShopBrandService {
         return shopBrandDto;
     }
 
+    /**
+     * 根据Id获取
+     * @param id
+     * @return
+     */
     @Override
     public ShopBrandVo get(Long id) {
         // 查询出品牌
@@ -78,6 +94,11 @@ public class ShopBrandServiceImpl implements ShopBrandService {
         return shopBrandVo;
     }
 
+    /**
+     * 删除
+     * 同时删除关联表
+     * @param id
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
@@ -87,6 +108,13 @@ public class ShopBrandServiceImpl implements ShopBrandService {
         shopBrandCategoryMapper.deleteByBrandId(id);
     }
 
+    /**
+     * 更新数据
+     * 1.修改品牌类
+     * 2.删除关联表
+     * 3.添加关联表
+     * @param shopBrandDto
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(ShopBrandDto shopBrandDto) {
@@ -111,6 +139,11 @@ public class ShopBrandServiceImpl implements ShopBrandService {
         }
     }
 
+    /**
+     * 添加
+     * 同时添加关联表
+     * @param shopBrandDto
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(ShopBrandDto shopBrandDto) {
@@ -131,5 +164,30 @@ public class ShopBrandServiceImpl implements ShopBrandService {
             // 存库
             shopBrandCategoryMapper.saveBatch(brandCategoryList);
         }
+    }
+
+    /**
+     * 根据分类Id查询品牌
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<ShopBrand> getByCategoryId(Long categoryId) {
+        List<ShopBrandCategory> shopBrandCategories=shopBrandCategoryMapper.getByCategoryId(categoryId);
+        if (CollectionUtils.isEmpty(shopBrandCategories)){
+            return new ArrayList<>(0);
+        }
+        List<Long> brandIds = shopBrandCategories.stream().map(ShopBrandCategory::getBrandId).collect(Collectors.toList());
+        return shopBrandMapper.getByIds(brandIds);
+    }
+
+    /**
+     * 根据名称查询
+     * @param name
+     * @return
+     */
+    @Override
+    public List<ShopBrand> getByName(String name) {
+        return shopBrandMapper.getByName(name);
     }
 }

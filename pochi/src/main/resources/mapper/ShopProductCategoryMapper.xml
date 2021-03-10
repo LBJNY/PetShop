@@ -130,4 +130,15 @@
         from shop_product_category
         where level = 1
     </select>
+    <select id="get" resultMap="BaseResultMap">
+        select id,
+               parent_id,
+               name,
+               level,
+               nav_status,
+               sort,
+               icon
+        from shop_product_category
+        where id = #{id}
+    </select>
 </mapper>

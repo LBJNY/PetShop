@@ -5,6 +5,8 @@ import com.lbj.pochi.pojo.dto.ShopBrandDto;
 import com.lbj.pochi.pojo.vo.ShopBrandVo;
 import com.lbj.pochi.utils.Page;
 
+import java.util.List;
+
 /**
  * 品牌类service
  */
@@ -47,4 +49,18 @@ public interface ShopBrandService {
      * @param shopBrandDto
      */
     void save(ShopBrandDto shopBrandDto);
+
+    /**
+     * 根据分类Id查询品牌
+     * @param categoryId
+     * @return
+     */
+    List<ShopBrand> getByCategoryId(Long categoryId);
+
+    /**
+     * 根据名称获取品牌
+     * @param name
+     * @return
+     */
+    List<ShopBrand> getByName(String name);
 }

@@ -85,6 +85,25 @@ public class ShopBrandController {
         page = shopBrandService.getByPage(page);
         return new Result<>(page);
     }
-
+    /**
+     * 分页查询
+     * @param categoryId
+     * @return
+     */
+    @RequestMapping(value = "/getByCategoryId/{categoryId}",  method = RequestMethod.GET)
+    public Result<List<ShopBrand>> getByCategoryId(@PathVariable Long categoryId) {
+        List<ShopBrand> list= shopBrandService.getByCategoryId(categoryId);
+        return new Result<>(list);
+    }
+    /**
+     * 分页查询
+     * @param name
+     * @return
+     */
+    @RequestMapping(value = "/getByName/{name}",  method = RequestMethod.GET)
+    public Result<List<ShopBrand>> getByName(@PathVariable String name) {
+        List<ShopBrand> list= shopBrandService.getByName(name);
+        return new Result<>(list);
+    }
 
 }

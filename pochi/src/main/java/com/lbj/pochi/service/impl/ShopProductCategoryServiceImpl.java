@@ -139,9 +139,9 @@ public class ShopProductCategoryServiceImpl implements ShopProductCategoryServic
                 .map(e -> {
                     e.setChildren(getChildren(e, categoryList));
                     //处理完之后给与子分类一个null
-                    /*if (CollectionUtils.isEmpty(e.getChildren())) {
+                    if (CollectionUtils.isEmpty(e.getChildren())) {
                         e.setChildren(null);
-                    }*/
+                    }
                     return e;
                 }).collect(Collectors.toList());
     }
@@ -195,6 +195,10 @@ public class ShopProductCategoryServiceImpl implements ShopProductCategoryServic
                 }).map(e -> {
                     // 构造子节点
                     e.setChildren(getChildren(e, categoryList));
+                    //处理完之后给与子菜单一个null
+                    if (CollectionUtils.isEmpty(e.getChildren())) {
+                        e.setChildren(null);
+                    }
                     return e;
                 }).collect(Collectors.toList());
     }

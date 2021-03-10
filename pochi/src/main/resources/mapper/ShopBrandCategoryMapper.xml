@@ -24,4 +24,10 @@
         from shop_brand_category
         where brand_id = #{brandId}
     </select>
+
+    <select id="getByCategoryId" resultMap="BaseResultMap">
+        select id, brand_id, category_id
+        from shop_brand_category
+        where category_id = #{categoryId}
+    </select>
 </mapper>

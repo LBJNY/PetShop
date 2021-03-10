@@ -110,4 +110,5 @@ public class ShopProductCategoryController {
         List<ShopProductCategory> list=shopProductCategoryService.getAllSecond();
         return new Result<>(list);
     }
+
 }
