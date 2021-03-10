@@ -38,6 +38,12 @@ public enum StateEnums {
     FOLDER(1,"目录"),
     MENU(2,"菜单"),
     AUTH(3,"权限"),
+    /**
+     * 优惠券
+     */
+    ALL(0,"全场通用"),
+    CATEGORY(0,"指定分类"),
+    PRODUCT(2,"指定商品")
     ;
 
     private Integer code;
