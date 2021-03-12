@@ -3,6 +3,7 @@ package com.lbj.pochi.service.impl;
 import com.lbj.pochi.mapper.ShopCouponCategoryMapper;
 import com.lbj.pochi.mapper.ShopCouponMapper;
 import com.lbj.pochi.mapper.ShopCouponProductMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.ShopCoupon;
 import com.lbj.pochi.pojo.ShopCouponCategory;
 import com.lbj.pochi.pojo.ShopCouponProduct;
@@ -42,9 +43,9 @@ public class ShopCouponServiceImpl implements ShopCouponService {
         ShopCoupon shopCoupon=new ShopCoupon();
         BeanUtils.copyProperties(shopCouponDto,shopCoupon);
         //设置属性
-        SysUserVo sysUserVo= ShiroUtils.getLoginUser();
-        shopCoupon.setCreateBy(sysUserVo.getUsername());
-        shopCoupon.setUpdateBy(sysUserVo.getUsername());
+        LoginUser loginUser = ShiroUtils.getLoginUser();
+        shopCoupon.setCreateBy(loginUser.getUsername());
+        shopCoupon.setUpdateBy(loginUser.getUsername());
         shopCoupon.setId(id);
         shopCoupon.setRestCount(shopCouponDto.getPublishCount());
         shopCouponMapper.save(shopCoupon);

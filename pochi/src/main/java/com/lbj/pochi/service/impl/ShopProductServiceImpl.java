@@ -77,7 +77,7 @@ public class ShopProductServiceImpl implements ShopProductService {
             shopProduct.setSubTitle(shopProduct.getName());
         }
         // 创建人、修改人
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         shopProduct.setCreateBy(loginUser.getUsername());
         shopProduct.setUpdateBy(loginUser.getUsername());
         shopProductMapper.save(shopProduct);
@@ -92,7 +92,7 @@ public class ShopProductServiceImpl implements ShopProductService {
      * @param shopProduct    当前商品
      * @param loginUser      当前登录用户
      */
-    private void handleProductPack(ShopProductDto shopProductDto, ShopProduct shopProduct, SysUserVo loginUser) {
+    private void handleProductPack(ShopProductDto shopProductDto, ShopProduct shopProduct, LoginUser loginUser) {
         //商品添加处理套装
         ShopPack shopPack = shopProductDto.getShopPack();
         List<ShopProduct> productList = shopProductDto.getProductList();
@@ -282,7 +282,7 @@ public class ShopProductServiceImpl implements ShopProductService {
             shopProduct.setSubTitle(shopProduct.getName());
         }
         // 创建人、修改人
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         shopProduct.setUpdateBy(loginUser.getUsername());
         shopProductMapper.update(shopProduct);
 
@@ -297,7 +297,7 @@ public class ShopProductServiceImpl implements ShopProductService {
      * @param shopProduct    当前商品
      * @param loginUser      当前登录用户
      */
-    private void handleUpdateProductPack(ShopProductDto shopProductDto, ShopProduct shopProduct, SysUserVo loginUser) {
+    private void handleUpdateProductPack(ShopProductDto shopProductDto, ShopProduct shopProduct, LoginUser loginUser) {
         //商品添加处理套装
         ShopPack shopPack = shopProductDto.getShopPack();
         List<ShopProduct> productList = shopProductDto.getProductList();

@@ -2,6 +2,7 @@ package com.lbj.pochi.mapper;
 
 import com.lbj.pochi.pojo.SysBanner;
 import com.lbj.pochi.utils.Page;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -59,4 +60,10 @@ public interface SysBannerMapper {
      * @param banner
      */
     void updateStatus(SysBanner banner);
+
+    /**
+     * 首页获取轮播图
+     * @return
+     */
+    List<Banner> getBannerList();
 }

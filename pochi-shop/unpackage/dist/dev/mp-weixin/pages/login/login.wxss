@@ -219,4 +219,10 @@
   color: #959595;
   margin-top: 20rpx;
 }
+button.data-v-b237504c {
+  background-color: transparent;
+}
+button.data-v-b237504c::after {
+  border: 0rpx;
+}
 

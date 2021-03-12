@@ -2,11 +2,14 @@ package com.lbj.pochi.controller;
 
 import com.lbj.pochi.enums.ResultEnum;
 import com.lbj.pochi.enums.StateEnums;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysUser;
 import com.lbj.pochi.pojo.SysUserRole;
 import com.lbj.pochi.pojo.TokenVo;
 import com.lbj.pochi.pojo.vo.SysUserVo;
 import com.lbj.pochi.service.SysUserService;
+import com.lbj.pochi.shiro.SysUserRealm;
+import com.lbj.pochi.shiro.UserToken;
 import com.lbj.pochi.utils.Page;
 import com.lbj.pochi.utils.Result;
 import com.lbj.pochi.utils.ShiroUtils;
@@ -143,7 +146,7 @@ public class SysUserController {
         }
         //使用shiro进行登录
         Subject subject = SecurityUtils.getSubject();
-        AuthenticationToken authenticationToken = new UsernamePasswordToken(sysUser.getUsername(), sysUser.getPassword());
+        AuthenticationToken authenticationToken = new UserToken(sysUser.getUsername(), sysUser.getPassword(), SysUserRealm.class);
         try {
             subject.login(authenticationToken);
         } catch (Exception e) {
@@ -164,10 +167,8 @@ public class SysUserController {
      * @return
      */
     @GetMapping("/info")
-    public Result<SysUserVo> info() {
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
-        loginUser.setPassword(null);
-        loginUser.setStatus(null);
+    public Result<LoginUser> info() {
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         return new Result<>(loginUser);
     }
 

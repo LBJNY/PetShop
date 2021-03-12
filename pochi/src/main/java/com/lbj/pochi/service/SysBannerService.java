@@ -2,6 +2,9 @@ package com.lbj.pochi.service;
 
 import com.lbj.pochi.pojo.SysBanner;
 import com.lbj.pochi.utils.Page;
+import org.springframework.boot.Banner;
+
+import java.util.List;
 
 /**
  */
@@ -56,4 +59,10 @@ public interface SysBannerService {
      * @return
      */
     Page<SysBanner> getByPage(Page<SysBanner> page);
+
+    /**
+     * 首页获取轮播图
+     * @return
+     */
+    List<Banner> getBannerList();
 }

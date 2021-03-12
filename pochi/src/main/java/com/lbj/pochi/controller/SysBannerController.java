@@ -5,7 +5,10 @@ import com.lbj.pochi.service.SysBannerService;
 import com.lbj.pochi.utils.Page;
 import com.lbj.pochi.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 轮播图控制器
@@ -101,4 +104,13 @@ public class SysBannerController {
         return new Result<>(page);
     }
 
+    /**
+     * 首页查询轮播图
+     * @return
+     */
+    @RequestMapping(value = "/getBannerList", method = RequestMethod.GET)
+    public Result<List<Banner>> getBannerList() {
+        List<Banner> list = sysBannerService.getBannerList();
+        return new Result<>(list);
+    }
 }

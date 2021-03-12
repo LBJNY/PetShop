@@ -3,6 +3,7 @@ package com.lbj.pochi.service.impl;
 import com.lbj.pochi.mapper.ShopPackMapper;
 import com.lbj.pochi.mapper.ShopProductMapper;
 import com.lbj.pochi.mapper.ShopProductPackMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.ShopPack;
 import com.lbj.pochi.pojo.ShopProduct;
 import com.lbj.pochi.pojo.ShopProductPack;
@@ -48,7 +49,7 @@ public class ShopPackServiceImpl implements ShopPackService {
         ShopPack shopPack = new ShopPack();
         BeanUtils.copyProperties(shopPackDto, shopPack);
         // ShopPack入库
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         shopPack.setCreateBy(loginUser.getUsername());
         Long packCode = idWorker.nextId();
         shopPack.setId(packCode);

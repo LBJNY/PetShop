@@ -2,6 +2,7 @@ package com.lbj.pochi.service.impl;
 
 import com.lbj.pochi.enums.StateEnums;
 import com.lbj.pochi.mapper.SysHelpMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysBanner;
 import com.lbj.pochi.pojo.SysHelp;
 import com.lbj.pochi.pojo.vo.SysUserVo;
@@ -29,7 +30,7 @@ public class SysHelpServiceImpl implements SysHelpService {
      */
     @Override
     public void save(SysHelp sysHelp) {
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysHelp.setCreatedBy(loginUser.getUsername());
         sysHelp.setUpdateBy(loginUser.getUsername());
         sysHelpMapper.save(sysHelp);
@@ -41,7 +42,7 @@ public class SysHelpServiceImpl implements SysHelpService {
      */
     @Override
     public void update(SysHelp sysHelp) {
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysHelp.setUpdateBy(loginUser.getUsername());
         sysHelpMapper.update(sysHelp);
     }

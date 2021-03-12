@@ -2,6 +2,7 @@ package com.lbj.pochi.service.impl;
 
 import com.lbj.pochi.enums.StateEnums;
 import com.lbj.pochi.mapper.SysBannerMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysBanner;
 import com.lbj.pochi.pojo.SysUser;
 import com.lbj.pochi.pojo.vo.SysUserVo;
@@ -9,6 +10,7 @@ import com.lbj.pochi.service.SysBannerService;
 import com.lbj.pochi.utils.Page;
 import com.lbj.pochi.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,7 @@ public class SysBannerServiceImpl implements SysBannerService {
 
     @Override
     public void save(SysBanner sysBanner) {
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysBanner.setCreateBy(loginUser.getUsername());
         sysBanner.setUpdateBy(loginUser.getUsername());
         sysBannerMapper.save(sysBanner);
@@ -31,7 +33,7 @@ public class SysBannerServiceImpl implements SysBannerService {
 
     @Override
     public void update(SysBanner sysBanner) {
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysBanner.setUpdateBy(loginUser.getUsername());
         sysBannerMapper.update(sysBanner);
     }
@@ -68,6 +70,12 @@ public class SysBannerServiceImpl implements SysBannerService {
         page.setList(list);
         page.setTotalCount(totalCount);
         return page;
+    }
+
+    @Override
+    public List<Banner> getBannerList() {
+
+        return sysBannerMapper.getBannerList();
     }
 
 

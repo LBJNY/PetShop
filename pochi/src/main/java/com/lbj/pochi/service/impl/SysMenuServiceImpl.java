@@ -5,6 +5,7 @@ import com.lbj.pochi.enums.ResultEnum;
 import com.lbj.pochi.enums.StateEnums;
 import com.lbj.pochi.exception.PochiException;
 import com.lbj.pochi.mapper.SysMenuMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysMenu;
 import com.lbj.pochi.pojo.SysUser;
 import com.lbj.pochi.pojo.vo.RouterVo;
@@ -91,7 +92,7 @@ public class SysMenuServiceImpl implements SysMenuService {
             throw new PochiException(ResultEnum.MENU_EXISTS);
         }
         // 设置修改人
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysMenu.setUpdateBy(loginUser.getUsername());
         sysMenuMapper.update(sysMenu);
     }
@@ -114,7 +115,7 @@ public class SysMenuServiceImpl implements SysMenuService {
             throw new PochiException(ResultEnum.MENU_EXISTS);
         }
         // 菜单不存在，入表
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysMenu.setCreateBy(loginUser.getUsername());
         sysMenu.setUpdateBy(loginUser.getUsername());
         // 添加
@@ -170,7 +171,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      */
     public List<RouterVo> getRouters() {
         // 1. 查询出当前登录用户所拥有的启用中的所有菜单（权限不要查）
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         List<SysMenu> menuList = sysMenuMapper.getEnableMenuByUserId(loginUser.getId());
         // 2. 构造成树形结构，也就是 `SysMenuVo`
         List<SysMenuVo> menuVoList = menuList.stream().filter(e -> e.getParentId().equals(CoreConstant.DEFAULT_PARENT_ID))

@@ -5,6 +5,7 @@ import com.lbj.pochi.enums.StateEnums;
 import com.lbj.pochi.exception.PochiException;
 import com.lbj.pochi.mapper.SysMenuMapper;
 import com.lbj.pochi.mapper.SysUserMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysMenu;
 import com.lbj.pochi.pojo.SysUser;
 import com.lbj.pochi.pojo.vo.SysUserVo;
@@ -57,8 +58,8 @@ public class SysUserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //处理登录逻辑
-        UsernamePasswordToken usernamePasswordToken= (UsernamePasswordToken) token;
-        String username=usernamePasswordToken.getUsername();
+        UserToken userToken= (UserToken) token;
+        String username=userToken.getUsername();
         SysUser sysUser = sysUserService.getByUserName(username);
         if (sysUser==null){
             throw new PochiException(ResultEnum.LOGIN_PARAM_ERROR);
@@ -72,15 +73,15 @@ public class SysUserRealm extends AuthorizingRealm {
             throw new PochiException(ResultEnum.LOGIN_PARAM_ERROR);
         }
         // 创建SYsUserVo拷贝属性
-        SysUserVo sysUserVo = new SysUserVo();
-        BeanUtils.copyProperties(sysUser, sysUserVo);
+        LoginUser loginUser = new LoginUser();
+        BeanUtils.copyProperties(sysUser, loginUser);
         // 在这里查询权限
         List<String> auths = sysMenuMapper.getMenuCodeByUserId(sysUser.getId());
         if (CollectionUtils.isEmpty(auths)) {
             throw new PochiException("当前用户不具备任何权限，禁止登录");
         }
-        sysUserVo.setAuths(auths);
-        return new SimpleAuthenticationInfo(sysUserVo,sysUser.getPassword(),this.getName());
+        loginUser.setAuths(auths);
+        return new SimpleAuthenticationInfo(loginUser,sysUser.getPassword(),this.getName());
     }
 
 }

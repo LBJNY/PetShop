@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/home/home",
     "pages/classify/classify",
     "pages/discover/discover",
@@ -109,5 +110,5 @@
     "mescroll-body": "/components/mescroll-uni/mescroll-body",
     "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap96.json"
 }

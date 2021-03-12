@@ -1,7 +1,10 @@
 package com.lbj.pochi.shiro;
 
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -17,7 +20,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.Filter;
 
@@ -25,6 +30,9 @@ import javax.servlet.Filter;
 public class ShiroConfig {
     @Autowired
     private SysUserRealm sysUserRealm;
+
+    @Autowired
+    private ShopUserRealm shopUserRealm;
 
     @Bean("shiroFilterFactoryBean")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
@@ -36,27 +44,39 @@ public class ShiroConfig {
         shiroFilters.put("authc", new LoginFilter());
         //配置需要认证或者放行的路径
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/sysUser/login","anon");
+        filterMap.put("/sysUser/login", "anon");
+        filterMap.put("/sysBanner/getBannerList", "anon");
+        filterMap.put("/wx/**", "anon");
         filterMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
 
-    /**
-     * 配置安全管理器
-     *
-     * @param sessionDaoConfig
-     * @return
-     */
     @Bean("securityManager")
     public SecurityManager securityManager(SessionDaoConfig sessionDaoConfig) {
-        DefaultSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(sysUserRealm);
-        // 自定义session管理，使用redis进行管理
-        TokenWebSessionManager sessionManager = new TokenWebSessionManager();
-        sessionManager.setSessionDAO(sessionDaoConfig);
-        securityManager.setSessionManager(sessionManager);
-        return securityManager;
+        DefaultWebSecurityManager def = new DefaultWebSecurityManager();
+        def.setAuthenticator(modularRealmAuthenticator());
+        List<Realm> realms = new ArrayList<>();
+        //添加多个Realm
+        realms.add(sysUserRealm);
+        realms.add(shopUserRealm);
+        def.setRealms(realms);
+        // 自定义session管理 使用redis
+        TokenWebSessionManager sessionConfig = new TokenWebSessionManager();
+        sessionConfig.setSessionDAO(sessionDaoConfig);
+        def.setSessionManager(sessionConfig);
+        return def;
+    }
+
+    /**
+     * 系统自带的Realm管理，主要针对多realm
+     */
+    @Bean
+    public ModularRealmAuthenticator modularRealmAuthenticator() {
+        //自己重写的ModularRealmAuthenticator
+        PochiAuthenticator modularRealmAuthenticator = new PochiAuthenticator();
+        modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        return modularRealmAuthenticator;
     }
 
     /**

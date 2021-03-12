@@ -2,6 +2,7 @@ package com.lbj.pochi.service.impl;
 
 import com.lbj.pochi.mapper.SysRoleMapper;
 import com.lbj.pochi.mapper.SysRoleMenuMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysRole;
 import com.lbj.pochi.pojo.SysRoleMenu;
 import com.lbj.pochi.pojo.SysUser;
@@ -37,7 +38,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public void save(SysRoleVo sysRoleVo) {
         // 设置创建人和修改人为用户名
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         //拷贝属性值
         SysRole sysRole = new SysRole();
         BeanUtils.copyProperties(sysRoleVo, sysRole);
@@ -60,7 +61,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public void update(SysRoleVo sysRoleVo) {
         // 设置创建人和修改人为用户名
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         //拷贝属性值
         SysRole sysRole = new SysRole();
         BeanUtils.copyProperties(sysRoleVo, sysRole);

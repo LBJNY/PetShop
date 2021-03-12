@@ -51,3 +51,9 @@ aliyun:
       - PNG
       - JPEG
       - GIF
+# 微信配置
+wechat:
+  appId: wxb2b5716e82d2e3e6
+  appSecret: eb4926835feb2f4044682379c36e661e
+  grantType: authorization_code
+  loginUrl: https://api.weixin.qq.com/sns/jscode2session

@@ -101,5 +101,14 @@
         set status=#{status}
         where id = #{id}
     </update>
-
+    <select id="getBannerList" resultMap="BaseResultMap">
+        select id,
+               name,
+               pic,
+               url
+        from sys_banner
+        where status = 1
+          and deleted = 0
+        order by sort
+    </select>
 </mapper>

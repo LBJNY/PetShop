@@ -9,14 +9,38 @@
 </template>
 
 <script>
+	import weChatApi from '@/api/wechat.js'
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: '喵喵屋'
 			}
 		},
-		onLoad() {
-			this.vusui.alert('常规信息框')
+		//页面显示触发
+		onShow() {
+			// 登录获取
+			uni.login({
+				provider: "weixin",
+				success: (res) => {
+					console.log(res)
+					// 获取微信登录用的code
+					const code = res.code
+					weChatApi.loginByCode(code).then(res => {
+						if (res.data.token) {
+							weChatApi.getLoginInfo().then(res => {
+								uni.setStorageSync('loginUser', res.data)
+							})
+							uni.setStorageSync('Authorization', res.data.token)
+						} else {
+							uni.setStorageSync('openId', res.data.openId)
+							console.log("openid:" + res.data.openId)
+						}
+						uni.switchTab({
+							url: '/pages/home/home'
+						})
+					})
+				}
+			})
 		},
 		methods: {
 

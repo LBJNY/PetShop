@@ -4,7 +4,6 @@ import lombok.Getter;
 
 /**
  * 状态码枚举。所有的状态码都在这里编写
- *
  */
 @Getter
 public enum StateEnums {
@@ -35,15 +34,37 @@ public enum StateEnums {
     /**
      * 菜单状态枚举
      */
-    FOLDER(1,"目录"),
-    MENU(2,"菜单"),
-    AUTH(3,"权限"),
+    FOLDER(1, "目录"),
+    MENU(2, "菜单"),
+    AUTH(3, "权限"),
     /**
      * 优惠券
      */
-    ALL(0,"全场通用"),
-    CATEGORY(0,"指定分类"),
-    PRODUCT(2,"指定商品")
+    ALL(0, "全场通用"),
+    CATEGORY(0, "指定分类"),
+    PRODUCT(2, "指定商品"),
+    /**
+     * 绑定账户状态
+     */
+    EXISTS_USER(1, "绑定已有账户"),
+    NEW_USER(2, "绑定新账户"),
+    /**
+     * 是否默认收货地址
+     */
+    ADDRESS_DEFAULT(1, "默认"),
+    ADDRESS_NOT_DEFAULT(0, "非默认"),
+    /**
+     * 优惠券领取状态
+     */
+    COUPON_NORMAL(1, "正常"),
+    COUPON_TIMEOUT(0, "过期"),
+    COUPON_RECEIVE(999, "已领取"),
+    /**
+     * 评论状态
+     */
+    COMMENT_SIMPLE(1, "普通评价"),
+    COMMENT_MCH(2, "商家回复"),
+    COMMENT_REVIEW(3, "追评"),
     ;
 
     private Integer code;

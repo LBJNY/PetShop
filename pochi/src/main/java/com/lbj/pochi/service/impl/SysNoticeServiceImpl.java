@@ -2,6 +2,7 @@ package com.lbj.pochi.service.impl;
 
 import com.lbj.pochi.enums.StateEnums;
 import com.lbj.pochi.mapper.SysNoticeMapper;
+import com.lbj.pochi.pojo.LoginUser;
 import com.lbj.pochi.pojo.SysNotice;
 import com.lbj.pochi.pojo.vo.SysUserVo;
 import com.lbj.pochi.service.SysNoticeService;
@@ -28,7 +29,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     @Override
     public void save(SysNotice sysNotice) {
         // 创建人默认值
-        SysUserVo loginUser = ShiroUtils.getLoginUser();
+        LoginUser loginUser = ShiroUtils.getLoginUser();
         sysNotice.setCreatedBy(loginUser.getUsername());
         sysNoticeMapper.save(sysNotice);
     }
