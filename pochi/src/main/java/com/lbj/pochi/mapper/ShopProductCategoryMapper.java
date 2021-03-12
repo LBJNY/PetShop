@@ -99,4 +99,10 @@ public interface ShopProductCategoryMapper  {
      * @return
      */
     ShopProductCategory get(Long categoryId);
+
+    /**
+     * 获取首页九宫格
+     * @return
+     */
+    List<ShopProductCategory> getNavList();
 }

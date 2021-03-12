@@ -66,5 +66,14 @@ export default {
       url: `/${groupName}/get/${id}`,
       method: 'get'
     })
-  }
+  },
+  /**
+   * 获取通知公告列表
+   */
+  getNoticeList() { 
+  		return request({
+  			url: `/${groupName}/getNoticeList`,
+  			method: 'get'
+  		})
+  	},
 }

@@ -46,6 +46,7 @@ public class ShiroConfig {
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/sysUser/login", "anon");
         filterMap.put("/sysBanner/getBannerList", "anon");
+        filterMap.put("/sysNotice/getNoticeList", "anon");
         filterMap.put("/wx/**", "anon");
         filterMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);

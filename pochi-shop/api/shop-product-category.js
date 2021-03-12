@@ -58,5 +58,11 @@ export default {
       url: `/${groupName}/getAllSecond`,
       method: 'get'
     })
-  }
+  },
+  getNavList() { // 根据id查询
+    	return request({
+    		url: `/${groupName}/getNavList`,
+    		method: 'get'
+    	})
+    },
 }

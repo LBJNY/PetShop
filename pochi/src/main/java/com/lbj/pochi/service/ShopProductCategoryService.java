@@ -66,4 +66,10 @@ public interface ShopProductCategoryService {
      * @return
      */
     List<ShopProductCategory> getAllSecond();
+
+    /**
+     * 查询导航宫格
+     * @return
+     */
+    List<ShopProductCategory> getNavList();
 }

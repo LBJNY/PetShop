@@ -21,14 +21,7 @@
 					<!-- <image src="/static/fkm_ico.png" mode=""></image> -->
 				</view>
 			</view>
-			<!-- 分类列表 -->
-			<view class="classify-list">
-				<view class="list" v-for="(item,index) in classList" :class="{'action':classifyShow==index}"
-					@click="onClassify(item,index)" :key="index">
-					<text>{{item.name}}</text>
-					<text class="line" v-show="classifyShow==index"></text>
-				</view>
-			</view>
+
 		</view>
 		<mescroll-body ref="mescrollRef" @down="downCallback" @up="upCallback" :down="downOption" :up="upOption"
 			:top="0">
@@ -47,8 +40,9 @@
 				<view class="menu-nav">
 					<scroll-view scroll-x @scroll="ScrollMenu" class="nav-list">
 						<view class="nav" ref="nav" :style="navList.length<=10?'flex-direction:row':''">
-							<view class="list" v-for="(item,index) in navList" @click="onSkip('menu')" :key="item.id">
-								<image :src="'/static/nav/nav_ico'+(index+1)+'.png'" mode=""></image>
+							<view class="list" v-for="(item,index) in navList" @click="onSkip('menu', item.id)"
+								:key="item.id">
+								<image :src="item.icon" mode=""></image>
 								<text>{{item.name}}</text>
 							</view>
 						</view>
@@ -68,19 +62,9 @@
 						<view class="info">
 							<swiper class="swiper" :circular="true" :vertical="true" :indicator-dots="false"
 								:autoplay="true" :interval="3000" :duration="1000">
-								<swiper-item>
-									<view class="swiper-item" @click="onSkip('inform')">
-										<text class="one-omit">何*** 理刚刚通过推广赚了￥25.00元，商品男装休闲装购买</text>
-									</view>
-								</swiper-item>
-								<swiper-item>
-									<view class="swiper-item" @click="onSkip('inform')">
-										<text class="one-omit">张*** 理刚刚通过推广赚了￥99.00元，商品Mac book pro 15寸购买</text>
-									</view>
-								</swiper-item>
-								<swiper-item>
-									<view class="swiper-item" @click="onSkip('inform')">
-										<text class="one-omit">郑*** 理刚刚通过推广赚了￥88.00元，商品华为meat30 pro购买</text>
+								<swiper-item v-for="item in  noticeList" :key='item.noticeId'>
+									<view class="swiper-item" @click="getNoticeInfo(item.noticeId)">
+										<text class="one-omit">{{item.noticeTitle}}</text>
 									</view>
 								</swiper-item>
 							</swiper>
@@ -243,6 +227,20 @@
 		<ClassifyData v-show="classifyShow!=0"></ClassifyData>
 		<!-- tabbar -->
 		<TabBar :tabBarShow="0"></TabBar>
+		<!-- 通知详情 -->
+		<view class="cu-modal" :class="noticeDialog?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">{{notice.noticeTitle}}</view>
+					<view class="action" @tap="noticeDialog = false">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					<rich-text :nodes="notice.noticeContent"></rich-text>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -252,6 +250,8 @@
 	// 引入mescroll-mixins.js
 	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
 	import bannerApi from '@/api/sys-banner.js'
+	import sysNoticeApi from '@/api/sys-notice.js'
+	import shopProductCategoryApi from '@/api/shop-product-category.js'
 	export default {
 		mixins: [MescrollMixin], // 使用mixin
 		components: {
@@ -269,59 +269,16 @@
 				},
 				swiperList: [],
 				slideNum: 0,
-				navList: [{
-					id: 1,
-					name: '手机专区',
-				}, {
-					id: 2,
-					name: '潮牌男装',
-				}, {
-					id: 3,
-					name: '运动男装',
-				}, {
-					id: 4,
-					name: '时尚背包',
-				}, {
-					id: 5,
-					name: '台式电脑',
-				}, {
-					id: 6,
-					name: '珠宝首饰',
-				}, {
-					id: 7,
-					name: '美颜美妆',
-				}, {
-					id: 8,
-					name: '家用电器',
-				}, {
-					id: 9,
-					name: '洗护用品',
-				}, {
-					id: 10,
-					name: '台式电脑',
-				}],
-				classList: [{
-					id: 0,
-					name: '首页',
-				}, {
-					id: 1,
-					name: '手机',
-				}, {
-					id: 2,
-					name: '男装',
-				}, {
-					id: 3,
-					name: '背包',
-				}, {
-					id: 4,
-					name: '电脑',
-				}, {
-					id: 5,
-					name: '珠宝',
-				}, {
-					id: 6,
-					name: '美妆',
-				}],
+				// 轮播图
+				swiperList: [],
+				// 通知公告
+				noticeList: [],
+				// 控制通知公告弹窗展示
+				noticeDialog: false,
+				// 当前点击的通知公告
+				notice: {},
+				//导航宫格
+				navList: [],
 				goodsList: [{
 					id: 1,
 					name: 'BANDALY 2020夏季女装连衣裙韩版大码宽松显瘦套装裙子两件套 JX19301 上豆绿下米白 M ',
@@ -496,13 +453,43 @@
 		},
 		onShow() {
 			this.getBannerList()
+			this.getNoticeList()
+			this.getNavList()
 		},
 		methods: {
+
 			// 查询轮播图
 			getBannerList() {
 				bannerApi.getBannerList().then(res => {
 					this.swiperList = res.data
+					//console.log(res.data)
+				})
+			},
+			/**
+			 * 获取通知公告列表
+			 */
+			getNoticeList() {
+				sysNoticeApi.getNoticeList().then(res => {
+					this.noticeList = res.data
 					console.log(res.data)
+				})
+			},
+			/**
+			 * 获取公告详情
+			 * @param {Object} id
+			 */
+			getNoticeInfo(id) {
+				sysNoticeApi.get(id).then(res => {
+					this.notice = res.data
+					this.noticeDialog = true
+				})
+			},
+			/**
+			 * 获取九宫格列表
+			 */
+			getNavList() {
+				shopProductCategoryApi.getNavList().then(res => {
+					this.navList = res.data
 				})
 			},
 			/*下拉刷新的回调, 有三种处理方式:*/

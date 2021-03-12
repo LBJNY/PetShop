@@ -179,6 +179,11 @@ public class ShopProductCategoryServiceImpl implements ShopProductCategoryServic
         return secondList;
     }
 
+    @Override
+    public List<ShopProductCategory> getNavList() {
+        return shopProductCategoryMapper.getNavList();
+    }
+
     /**
      * 创建树  此处主要进行顶级分类过滤  然后调用递归
      *

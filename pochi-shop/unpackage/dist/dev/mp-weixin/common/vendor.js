@@ -12205,6 +12205,173 @@ var groupName = 'sysBanner';var _default =
 
   } };exports.default = _default;
 
+/***/ }),
+
+/***/ 689:
+/*!*******************************************************************!*\
+  !*** D:/study/MyDev/program/PetMall/pochi-shop/api/sys-notice.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var groupName = 'sysNotice';var _default =
+{
+  /**
+   * 添加
+   */
+  save: function save(sysNotice) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/save"),
+      method: 'post',
+      data: sysNotice });
+
+  },
+  /**
+     * 修改
+     */
+  update: function update(sysNotice) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/update"),
+      method: 'put',
+      data: sysNotice });
+
+  },
+  /**
+      * 分页
+      */
+  getByPage: function getByPage(page) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getByPage"),
+      method: 'post',
+      data: page });
+
+  },
+  /**
+      * 启用
+      */
+  enableById: function enableById(id) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/enable/").concat(id),
+      method: 'put' });
+
+  },
+  /**
+      * 禁用
+      */
+  disableById: function disableById(id) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/disable/").concat(id),
+      method: 'put' });
+
+  },
+  /**
+      * 删除
+      */
+  deleteById: function deleteById(id) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/delete/").concat(id),
+      method: 'delete' });
+
+  },
+  /**
+      * 根据id查询
+      */
+  get: function get(id) {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/get/").concat(id),
+      method: 'get' });
+
+  },
+  /**
+      * 获取通知公告列表
+      */
+  getNoticeList: function getNoticeList() {
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getNoticeList"),
+      method: 'get' });
+
+  } };exports.default = _default;
+
+/***/ }),
+
+/***/ 690:
+/*!******************************************************************************!*\
+  !*** D:/study/MyDev/program/PetMall/pochi-shop/api/shop-product-category.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var groupName = 'shopProductCategory';var _default =
+{
+  getByPage: function getByPage(page) {// 分页查询
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getByPage"),
+      method: 'post',
+      data: page });
+
+  },
+  save: function save(shopProductCategory) {// 保存
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/save"),
+      method: 'post',
+      data: shopProductCategory });
+
+  },
+  get: function get(id) {// 根据id查询
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/get/").concat(id),
+      method: 'get' });
+
+  },
+  getTree: function getTree() {// 根据id查询
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getTree"),
+      method: 'get' });
+
+  },
+  getSelectTree: function getSelectTree() {// 根据id查询
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getSelectTree"),
+      method: 'get' });
+
+  },
+  getAll: function getAll() {// 根据id查询
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getAll"),
+      method: 'get' });
+
+  },
+  update: function update(shopProductCategory) {// 更新
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/update"),
+      method: 'put',
+      data: shopProductCategory });
+
+  },
+  deleteById: function deleteById(id) {// 根据id删除
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/delete"),
+      method: 'put',
+      data: { id: id } });
+
+  },
+  getAllSecond: function getAllSecond() {// 查询所有二级菜单
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getAllSecond"),
+      method: 'get' });
+
+  },
+  getNavList: function getNavList() {// 根据id查询
+    return (0, _request.default)({
+      url: "/".concat(groupName, "/getNavList"),
+      method: 'get' });
+
+  } };exports.default = _default;
+
 /***/ })
 
 }]);

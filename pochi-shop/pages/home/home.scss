@@ -21,7 +21,7 @@
 	/* #endif */
 	/* #ifdef MP */
 	padding:0 25rpx;
-	height: 170rpx;
+	height: 110rpx;
 	/* #endif */
 	background: url(../../static/head_bg.png) no-repeat;
 	background-size: 100% 433rpx;
@@ -119,7 +119,7 @@
 	margin-top: calc(200rpx + var(--status-bar-height));
 	/* #endif */
 	/* #ifdef MP */
-	margin-top: 170rpx;
+	margin-top: 110rpx;
 	/* #endif */
 	padding-top: 20rpx;
 	background-color: #FFFFFF;

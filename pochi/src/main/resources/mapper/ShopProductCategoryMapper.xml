@@ -141,4 +141,14 @@
         from shop_product_category
         where id = #{id}
     </select>
+    <select id="getNavList" resultMap="BaseResultMap">
+        select id,
+               name,
+               icon
+        from shop_product_category
+        where level = 3
+          and nav_status = 1
+        order by sort
+        limit 10
+    </select>
 </mapper>

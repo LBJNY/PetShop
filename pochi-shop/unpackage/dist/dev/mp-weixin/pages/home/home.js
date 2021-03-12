@@ -123,6 +123,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      _vm.noticeDialog = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -406,18 +411,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/components/mescroll-uni/mescroll-mixins.js */ 56));
-var _sysBanner = _interopRequireDefault(__webpack_require__(/*! @/api/sys-banner.js */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var TabBar = function TabBar() {__webpack_require__.e(/*! require.ensure | components/TabBar/TabBar */ "components/TabBar/TabBar").then((function () {return resolve(__webpack_require__(/*! ../../components/TabBar/TabBar.vue */ 553));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ClassifyData = function ClassifyData() {__webpack_require__.e(/*! require.ensure | components/ClassifyData/ClassifyData */ "components/ClassifyData/ClassifyData").then((function () {return resolve(__webpack_require__(/*! ../../components/ClassifyData/ClassifyData.vue */ 546));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _sysBanner = _interopRequireDefault(__webpack_require__(/*! @/api/sys-banner.js */ 57));
+var _sysNotice = _interopRequireDefault(__webpack_require__(/*! @/api/sys-notice.js */ 689));
+var _shopProductCategory = _interopRequireDefault(__webpack_require__(/*! @/api/shop-product-category.js */ 690));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var TabBar = function TabBar() {__webpack_require__.e(/*! require.ensure | components/TabBar/TabBar */ "components/TabBar/TabBar").then((function () {return resolve(__webpack_require__(/*! ../../components/TabBar/TabBar.vue */ 553));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ClassifyData = function ClassifyData() {__webpack_require__.e(/*! require.ensure | components/ClassifyData/ClassifyData */ "components/ClassifyData/ClassifyData").then((function () {return resolve(__webpack_require__(/*! ../../components/ClassifyData/ClassifyData.vue */ 546));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   mixins: [_mescrollMixins.default], // 使用mixin
   components: {
     TabBar: TabBar,
     ClassifyData: ClassifyData },
 
-  data: function data() {
-    return {
+  data: function data() {var _ref;
+    return _ref = {
       mescroll: null, // mescroll实例对象 (此行可删,mixins已默认)
       // 下拉刷新的配置(可选, 绝大部分情况无需配置)
       downOption: {},
@@ -426,204 +431,161 @@ var _sysBanner = _interopRequireDefault(__webpack_require__(/*! @/api/sys-banner
         use: false },
 
       swiperList: [],
-      slideNum: 0,
-      navList: [{
-        id: 1,
-        name: '手机专区' },
-      {
-        id: 2,
-        name: '潮牌男装' },
-      {
-        id: 3,
-        name: '运动男装' },
-      {
-        id: 4,
-        name: '时尚背包' },
-      {
-        id: 5,
-        name: '台式电脑' },
-      {
-        id: 6,
-        name: '珠宝首饰' },
-      {
-        id: 7,
-        name: '美颜美妆' },
-      {
-        id: 8,
-        name: '家用电器' },
-      {
-        id: 9,
-        name: '洗护用品' },
-      {
-        id: 10,
-        name: '台式电脑' }],
+      slideNum: 0 }, _defineProperty(_ref, "swiperList",
 
-      classList: [{
-        id: 0,
-        name: '首页' },
-      {
-        id: 1,
-        name: '手机' },
-      {
-        id: 2,
-        name: '男装' },
-      {
-        id: 3,
-        name: '背包' },
-      {
-        id: 4,
-        name: '电脑' },
-      {
-        id: 5,
-        name: '珠宝' },
-      {
-        id: 6,
-        name: '美妆' }],
+    []), _defineProperty(_ref, "noticeList",
 
-      goodsList: [{
-        id: 1,
-        name: 'BANDALY 2020夏季女装连衣裙韩版大码宽松显瘦套装裙子两件套 JX19301 上豆绿下米白 M ',
-        price: '219.00',
-        vip_price: '129.00',
-        img: '/static/img/goods_thumb_01.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '花花公子 卫衣男秋季圆领薄款休闲体恤男士时尚长袖T恤外套上衣男生情侣装套头衣服秋天男装 白色 XL',
-        price: '139.00',
-        vip_price: '99.00',
-        img: '/static/img/goods_thumb_02.png',
-        is_goods: 1 },
-      {
-        id: 1,
-        name: '【两件套】花花公子PLAYBOY短袖T恤男套装夏季新款卫衣男士韩版修身冰丝宽松运动休闲上衣服裤子男装 CYFS903卡其色 XL',
-        price: '168.00',
-        vip_price: '158.00',
-        img: '/static/img/goods_thumb_03.png',
-        is_goods: 1 },
-      {
-        id: 1,
-        name: '雪域森林短袖T恤男装2020夏季潮流时尚衣服男潮牌圆领印花宽松T恤半袖男 20855橙色 XL',
-        price: '68.00',
-        vip_price: '36.00',
-        img: '/static/img/goods_thumb_04.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '短袖男夏季T恤男装韩版潮流印花套头衣服男士圆领宽松五分袖学生休闲夏天运动时尚情侣装大码 D119白色 XL',
-        price: '68.00',
-        vip_price: '59.00',
-        img: '/static/img/goods_thumb_05.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '时尚休闲套装女夏季热天宽松女孩中学生高中初中生女生短袖套装衣服夏天少女学生韩版原宿风T恤潮流裤子一套 绿字母上衣+绿色裤两件套 均码',
-        price: '83.00',
-        vip_price: '78.00',
-        img: '/static/img/goods_thumb_06.png',
-        is_goods: 1 },
-      {
-        id: 1,
-        name: '北极绒2020春夏季棉质睡衣女睡裙女夏季韩版纯棉短袖少女性感睡衣甜美可爱卡通家居服连衣裙 A3023 M【纯棉 品质保障】',
-        price: '68.00',
-        vip_price: '48.00',
-        img: '/static/img/goods_thumb_07.png',
-        is_goods: 1 },
-      {
-        id: 1,
-        name: '韩卡婷 2020新款夏季短袖t恤女宽松学生衣服原宿风青春百搭显瘦上衣体恤闺蜜女装 白色 均码【80-120斤】',
-        price: '29.00',
-        vip_price: '19.00',
-        img: '/static/img/goods_thumb_08.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '美连诚雪纺连衣裙 2020新款女夏裙子波点气质沙滩裙仙气时尚女装休闲衣服大码女装 白底红点 M ',
-        price: '168.00',
-        vip_price: '160.00',
-        img: '/static/img/goods_thumb_09.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '凝拉t恤女短袖纯棉2020新款夏装中长款韩版宽松大码欧货潮上衣服半袖体恤 桔色2053 2XL（建议150-170斤)',
-        price: '89.00',
-        vip_price: '78.00',
-        img: '/static/img/goods_thumb_10.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '荣耀Play4T 全网通6GB+128GB大内存 幻夜黑 4000mAh大电池 4800万AI摄影  6.39英寸魅眼屏',
-        price: '1190.00',
-        vip_price: '1100.00',
-        img: '/static/img/goods_thumb_11.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '小米（MI） Redmi 8A',
-        price: '699.00',
-        vip_price: '599.00',
-        img: '/static/img/goods_thumb_12.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: 'Apple iPhone 11',
-        price: '5899.00',
-        vip_price: '5800.00',
-        img: '/static/img/goods_thumb_13.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '戴尔(DELL)成就3681英特尔酷睿i5商用办公高性能台式机电脑整机(十代i5-10400 8G 1T 三年上门售后)21.5英寸',
-        price: '3699.00',
-        vip_price: '3600.00',
-        img: '/static/img/goods_thumb_14.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '戴尔DELL灵越5000 14英寸酷睿i5网课学习轻薄笔记本电脑(十代i5-1035G1 8G 512G MX230 2G独显)银',
-        price: '4888.00',
-        vip_price: '4999.00',
-        img: '/static/img/goods_thumb_15.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '联想(Lenovo) 来酷 Lecoo一体台式机电脑23英寸(J4105 8G 256G SSD 三年上门）白',
-        price: '4888.00',
-        vip_price: '3600.00',
-        img: '/static/img/goods_thumb_16.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: 'Apple 2020新款 MacBook Pro 13.3【带触控栏】十代i5 16G 512G 2.0GHz 深空灰 笔记本电脑 轻薄本 MWP42CHA',
-        price: '18200.00',
-        vip_price: '18200.00',
-        img: '/static/img/goods_thumb_17.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: 'Apple新款 Mac mini台式电脑主机 八代i5 8G 512G SSD 台式机 MXNG2CHA',
-        price: '8299.00',
-        vip_price: '8200.00',
-        img: '/static/img/goods_thumb_18.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '同仁堂美白祛斑霜套装 淡斑美白祛黄提亮补水保湿套装 男女士护肤美白化妆品套装',
-        price: '288.00',
-        vip_price: '282.00',
-        img: '/static/img/goods_thumb_19.png',
-        is_goods: 0 },
-      {
-        id: 1,
-        name: '【限定款·雕花口红8支礼盒装】中国风口红套装七夕礼物送女朋友老婆生日礼物唇膏唇釉花仙西子同心锁口红 【限定款8支雕花口红】',
-        price: '188.00',
-        vip_price: '99.00',
-        img: '/static/img/goods_thumb_20.png',
-        is_goods: 0 }],
+    []), _defineProperty(_ref, "noticeDialog",
 
-      classifyShow: 0,
-      // 页面高度
-      pageHeight: 500 };
+    false), _defineProperty(_ref, "notice",
+
+    {}), _defineProperty(_ref, "navList",
+
+    []), _defineProperty(_ref, "goodsList",
+    [{
+      id: 1,
+      name: 'BANDALY 2020夏季女装连衣裙韩版大码宽松显瘦套装裙子两件套 JX19301 上豆绿下米白 M ',
+      price: '219.00',
+      vip_price: '129.00',
+      img: '/static/img/goods_thumb_01.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '花花公子 卫衣男秋季圆领薄款休闲体恤男士时尚长袖T恤外套上衣男生情侣装套头衣服秋天男装 白色 XL',
+      price: '139.00',
+      vip_price: '99.00',
+      img: '/static/img/goods_thumb_02.png',
+      is_goods: 1 },
+    {
+      id: 1,
+      name: '【两件套】花花公子PLAYBOY短袖T恤男套装夏季新款卫衣男士韩版修身冰丝宽松运动休闲上衣服裤子男装 CYFS903卡其色 XL',
+      price: '168.00',
+      vip_price: '158.00',
+      img: '/static/img/goods_thumb_03.png',
+      is_goods: 1 },
+    {
+      id: 1,
+      name: '雪域森林短袖T恤男装2020夏季潮流时尚衣服男潮牌圆领印花宽松T恤半袖男 20855橙色 XL',
+      price: '68.00',
+      vip_price: '36.00',
+      img: '/static/img/goods_thumb_04.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '短袖男夏季T恤男装韩版潮流印花套头衣服男士圆领宽松五分袖学生休闲夏天运动时尚情侣装大码 D119白色 XL',
+      price: '68.00',
+      vip_price: '59.00',
+      img: '/static/img/goods_thumb_05.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '时尚休闲套装女夏季热天宽松女孩中学生高中初中生女生短袖套装衣服夏天少女学生韩版原宿风T恤潮流裤子一套 绿字母上衣+绿色裤两件套 均码',
+      price: '83.00',
+      vip_price: '78.00',
+      img: '/static/img/goods_thumb_06.png',
+      is_goods: 1 },
+    {
+      id: 1,
+      name: '北极绒2020春夏季棉质睡衣女睡裙女夏季韩版纯棉短袖少女性感睡衣甜美可爱卡通家居服连衣裙 A3023 M【纯棉 品质保障】',
+      price: '68.00',
+      vip_price: '48.00',
+      img: '/static/img/goods_thumb_07.png',
+      is_goods: 1 },
+    {
+      id: 1,
+      name: '韩卡婷 2020新款夏季短袖t恤女宽松学生衣服原宿风青春百搭显瘦上衣体恤闺蜜女装 白色 均码【80-120斤】',
+      price: '29.00',
+      vip_price: '19.00',
+      img: '/static/img/goods_thumb_08.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '美连诚雪纺连衣裙 2020新款女夏裙子波点气质沙滩裙仙气时尚女装休闲衣服大码女装 白底红点 M ',
+      price: '168.00',
+      vip_price: '160.00',
+      img: '/static/img/goods_thumb_09.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '凝拉t恤女短袖纯棉2020新款夏装中长款韩版宽松大码欧货潮上衣服半袖体恤 桔色2053 2XL（建议150-170斤)',
+      price: '89.00',
+      vip_price: '78.00',
+      img: '/static/img/goods_thumb_10.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '荣耀Play4T 全网通6GB+128GB大内存 幻夜黑 4000mAh大电池 4800万AI摄影  6.39英寸魅眼屏',
+      price: '1190.00',
+      vip_price: '1100.00',
+      img: '/static/img/goods_thumb_11.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '小米（MI） Redmi 8A',
+      price: '699.00',
+      vip_price: '599.00',
+      img: '/static/img/goods_thumb_12.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: 'Apple iPhone 11',
+      price: '5899.00',
+      vip_price: '5800.00',
+      img: '/static/img/goods_thumb_13.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '戴尔(DELL)成就3681英特尔酷睿i5商用办公高性能台式机电脑整机(十代i5-10400 8G 1T 三年上门售后)21.5英寸',
+      price: '3699.00',
+      vip_price: '3600.00',
+      img: '/static/img/goods_thumb_14.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '戴尔DELL灵越5000 14英寸酷睿i5网课学习轻薄笔记本电脑(十代i5-1035G1 8G 512G MX230 2G独显)银',
+      price: '4888.00',
+      vip_price: '4999.00',
+      img: '/static/img/goods_thumb_15.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '联想(Lenovo) 来酷 Lecoo一体台式机电脑23英寸(J4105 8G 256G SSD 三年上门）白',
+      price: '4888.00',
+      vip_price: '3600.00',
+      img: '/static/img/goods_thumb_16.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: 'Apple 2020新款 MacBook Pro 13.3【带触控栏】十代i5 16G 512G 2.0GHz 深空灰 笔记本电脑 轻薄本 MWP42CHA',
+      price: '18200.00',
+      vip_price: '18200.00',
+      img: '/static/img/goods_thumb_17.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: 'Apple新款 Mac mini台式电脑主机 八代i5 8G 512G SSD 台式机 MXNG2CHA',
+      price: '8299.00',
+      vip_price: '8200.00',
+      img: '/static/img/goods_thumb_18.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '同仁堂美白祛斑霜套装 淡斑美白祛黄提亮补水保湿套装 男女士护肤美白化妆品套装',
+      price: '288.00',
+      vip_price: '282.00',
+      img: '/static/img/goods_thumb_19.png',
+      is_goods: 0 },
+    {
+      id: 1,
+      name: '【限定款·雕花口红8支礼盒装】中国风口红套装七夕礼物送女朋友老婆生日礼物唇膏唇釉花仙西子同心锁口红 【限定款8支雕花口红】',
+      price: '188.00',
+      vip_price: '99.00',
+      img: '/static/img/goods_thumb_20.png',
+      is_goods: 0 }]), _defineProperty(_ref, "classifyShow",
+
+    0), _defineProperty(_ref, "pageHeight",
+
+    500), _ref;
 
   },
   onReady: function onReady() {
@@ -654,13 +616,43 @@ var _sysBanner = _interopRequireDefault(__webpack_require__(/*! @/api/sys-banner
   },
   onShow: function onShow() {
     this.getBannerList();
+    this.getNoticeList();
+    this.getNavList();
   },
   methods: {
+
     // 查询轮播图
     getBannerList: function getBannerList() {var _this = this;
       _sysBanner.default.getBannerList().then(function (res) {
         _this.swiperList = res.data;
+        //console.log(res.data)
+      });
+    },
+    /**
+        * 获取通知公告列表
+        */
+    getNoticeList: function getNoticeList() {var _this2 = this;
+      _sysNotice.default.getNoticeList().then(function (res) {
+        _this2.noticeList = res.data;
         console.log(res.data);
+      });
+    },
+    /**
+        * 获取公告详情
+        * @param {Object} id
+        */
+    getNoticeInfo: function getNoticeInfo(id) {var _this3 = this;
+      _sysNotice.default.get(id).then(function (res) {
+        _this3.notice = res.data;
+        _this3.noticeDialog = true;
+      });
+    },
+    /**
+        * 获取九宫格列表
+        */
+    getNavList: function getNavList() {var _this4 = this;
+      _shopProductCategory.default.getNavList().then(function (res) {
+        _this4.navList = res.data;
       });
     },
     /*下拉刷新的回调, 有三种处理方式:*/
@@ -668,20 +660,20 @@ var _sysBanner = _interopRequireDefault(__webpack_require__(/*! @/api/sys-banner
       this.mescroll.endSuccess();
     },
     /*上拉加载的回调*/
-    upCallback: function upCallback(page) {var _this2 = this;
+    upCallback: function upCallback(page) {var _this5 = this;
       setTimeout(function () {
-        _this2.mescroll.endByPage(10, 20);
+        _this5.mescroll.endByPage(10, 20);
       }, 2000);
     },
     /**
         * 菜单导航滚动
         */
-    ScrollMenu: function ScrollMenu(e) {var _this3 = this;
+    ScrollMenu: function ScrollMenu(e) {var _this6 = this;
       var scrollLeft = e.target.scrollLeft;
       var query = uni.createSelectorQuery().in(this);
       query.select('.nav').boundingClientRect(function (data) {
         var wid = e.target.scrollWidth - data.width - (data.left * 2 + 5);
-        _this3.slideNum = scrollLeft / wid * 300 / 2;
+        _this6.slideNum = scrollLeft / wid * 300 / 2;
       }).exec();
     },
     /**

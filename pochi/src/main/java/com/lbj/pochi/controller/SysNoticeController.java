@@ -8,6 +8,8 @@ import com.lbj.pochi.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 公告控制器
  *
@@ -102,4 +104,13 @@ public class SysNoticeController {
         return new Result<>(page);
     }
 
+    /**
+     * 前端首页查询通知
+     * @return
+     */
+    @RequestMapping(value = "/getNoticeList", method = RequestMethod.GET)
+    public Result<List<SysNotice>> getNoticeList() {
+        List<SysNotice> notices = sysNoticeService.getNoticeList();
+        return new Result<>(notices);
+    }
 }

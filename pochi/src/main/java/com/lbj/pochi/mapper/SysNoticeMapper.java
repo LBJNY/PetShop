@@ -58,4 +58,10 @@ public interface SysNoticeMapper {
      * @return
      */
     Integer countByPage(Page<SysNotice> page);
+
+    /**
+     * 获取通知公告列表
+     * @return
+     */
+    List<SysNotice> getNoticeList();
 }
